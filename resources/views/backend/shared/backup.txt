@@ -1,0 +1,38 @@
+<div class="col-md-6 pr-1">
+    <div class="form-group">
+        {!! Form::label('estimate_amount_description_0', 'Description') !!}
+        {!! Form::textarea('estimate_amount_description',null, ['class' => 'form-control form-control-sm','rows'=>'5','id'=>'estimate_amount_description_0']) !!}
+    </div>
+</div>
+<div class="col-md-2 pr-1">
+    <div class="form-group">
+        {!! Form::label('estimate_amount_vat_rate_0', 'Vat Rate') !!}
+        {!! Form::select('estimate_amount_vat_rate',vat_rate(),'20', ['class' => 'form-control form-control-sm form-control-right change_vat_rate','id'=>'estimate_amount_vat_rate_0','data-index'=>'0']) !!}
+    </div>
+</div>
+<div class="col-md-2 pr-1">
+    <div class="form-group">
+        {!! Form::label('estimate_amount_0', 'Amount') !!}
+        {!! Form::number('estimate_amount',null, ['class' => 'form-control form-control-sm form-control-right calculate_vat','id'=>'estimate_amount_0','data-index'=>'0']) !!}
+    </div>
+</div>
+<div class="col-md-1 pr-1">
+    <div class="form-group">
+        {!! Form::label('estimate_amount_vat_0', 'VAT') !!}
+        {!! Form::number('estimate_amount_vat',null, ['class' => 'form-control form-control-sm form-control-right','id'=>'estimate_amount_vat_0','readonly']) !!}
+        {!! Form::hidden('estimate_amount_total_amount',null, ['id'=>'estimate_amount_total_amount_0','readonly']) !!}
+    </div>
+</div>
+<div class="col-md-1">
+    <div class="form-group">
+        <input type="hidden" id="estimate_id" value="{{@$enquiry->id}}">
+        <label for="addNewEstimateAmount">&nbsp;</label>
+        @if (isset($oldData))
+            <button type="button" class="btn btn-sm btn-block btn-primary" id="addNewEstimateAmount"
+                    data-route="{{route('estimates.amount',@$oldData->id)}}">Add
+            </button>
+        @else
+            <button type="button" class="btn btn-sm btn-block btn-primary" id="addNewEstimateAmountDom">Add</button>
+        @endif
+    </div>
+</div>

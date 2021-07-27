@@ -1,0 +1,394 @@
+/* CSS Document */
+
+/*
+html, body {
+	height: 100%;
+	margin: 0;
+	font-size: 16px;
+	font-family: "Lato", sans-serif;
+	font-weight: 400;
+	line-height: 1.8em;
+	color: #666;	
+}
+*/
+
+html,body {
+	margin: 0px;
+	padding: 0px;
+	box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+#mainDiv {
+    padding: 0;
+    margin: 0;
+	left: 0;
+	top: 0;
+    width: 100%;
+    height: 100%;
+	background: #FFFFFF;
+	overflow: hidden;
+}
+
+#header {
+	font-family: Arial, Helvetica, sans-serif;
+	width: 100%;
+	height: 160px;
+	margin: 0px;
+	border-bottom: 10px solid #600612;
+}
+
+#headerLogoTitle {
+	color: #600612;
+	font-size: 1.5em;
+	font-weight:700;
+	padding: 0px;
+	margin: 0 auto;
+}
+
+#mainBodyLoginPage {
+    position: fixed;
+	opacity: 0.4;
+	background: url(../images/french_polishing.jpg) no-repeat center center fixed;	/* Image courtesy of Google Search on "French Polishing" */
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	background-repeat: no-repeat;
+	
+	font-weight: 300;
+	font-size: 14px;
+	color: #333333;
+	overflow: auto;
+    padding: 0;
+    margin: 0;
+	left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#loginBox {
+	position: fixed;
+	margin-top: 10%;
+	margin-left: 33%;
+	
+	width: 600px;
+	height: 330px;
+	color: #FFFFFF;
+	border: 3px solid #333333;
+	background-color: rgba(96, 6, 18, .9);
+}
+
+#loginInstruction {
+	margin-top: 40px;
+	margin-bottom: auto;
+	margin-left: 150px;
+	margin-right: auto;
+	width: 300px;
+	font-size: 18px;
+	border-bottom: 1px solid #DA9B3B;
+}
+
+#loginForm {
+	margin-top: 50px;
+	margin-bottom: auto;
+	margin-left: 150px;
+	margin-right: auto;
+	width: 300px;
+	height: 150px;
+}
+
+#loginForm table caption{
+	font-size: 18px;
+	text-align: left;
+	margin-bottom: 10px;	
+}
+
+#loginForm table tr{
+	line-height: 35px;
+}
+
+#loginForm table tr td{
+	padding: 0;
+}
+
+/* Style the Navigation */
+#navigationLoggedIn{
+	width: 100%;
+	height: 65px;
+	border-bottom: 3px solid #600612;
+	
+}
+
+#top-menu-LoggedIn{
+	position: relative;
+}
+
+.menuHoriz{
+	float: left;
+	width: 100%;
+	height: 100%;
+}
+
+.menuHoriz ul{
+	display: block;
+	list-style-type: none;
+	width: 75%;
+	margin: 0 auto;
+	padding: 0;
+	padding-left: 5%;
+}
+
+.menuHoriz ul li{
+	margin: 0;
+	padding: 0;
+}
+
+.menuHoriz ul li a{
+	display: block;
+	float: left;
+	max-height: 65px;
+	width: 140px;
+	height: 65px;
+	margin: 0;
+	padding: 10px 0;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 18px;
+	font-weight: 600;
+	text-align: center;
+	text-decoration: none;
+	color: #600612;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.menuHoriz ul li a:hover{
+	color: #FFFFFF;
+	background-color: rgba(96, 6, 18, .8);
+	border-bottom: 3px solid #333333;
+}
+
+
+#mainBodyLoggedIn {
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: 300;
+	font-size: 14px;
+	color: #000000;
+	margin-bottom: 10px;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 10px;
+	width: 98%;
+	min-height: 650px;
+	border: 2px solid #600612;
+	border-radius: 15px;
+}
+
+
+/* Style the Controls */
+input[type=text], input[type=password], [type=number], [type=file], [type=date], [type=datetime-local] {
+	width: 100%;
+	height:35px;
+	border: 3px solid #DA9B3B; 	
+}
+
+.dropDownListStyle{
+	width:100%;
+	height:35px;
+	border-radius:5px;
+	border: 3px solid #DA9B3B;
+}
+
+.textAreaStyle{
+	width:100%;
+	height:35px;
+	border-radius:5px;
+	border: 3px solid #DA9B3B;
+}
+
+.fileButtonStyleHidden{
+	display: none;
+}
+
+.fileButtonStyleDisplay{
+	width:  93px;
+	height: 27px;
+	border: 2px solid black;
+}
+
+
+/* Style the buttons */
+/* button style courtesy of https://www.fabriziovanmarciano.com/button-styles/ example c */
+.buttonStyle {
+	color: rgba(96, 6, 18) !important;
+	text-decoration: none;
+	background: #FFFFFF;
+	padding: 10px;
+	border: 4px solid #494949 !important;
+	display: inline-block;
+	transition: all 0.2s ease 0s;
+}
+
+.buttonStyle:hover {
+	color: #FFFFFF !important;
+	background: #F6B93B;
+	border-color: #FFFFFF !important;
+	transition: all 0.2s ease 0s;
+}
+
+.btnStyle1{
+	width:55px; 
+	height:35px; 
+	line-height:30px;
+	padding: 2px;
+}
+
+.btnStyle1:hover {
+	color: #FFFFFF !important;
+	background: #F6B93B;
+	border-color: #600612 !important;
+	transition: all 0.2s ease 0s;
+}
+
+.btnStyle2{
+	width:112px;
+	height:35px; 
+	line-height:30px;
+	padding: 2px;
+}
+
+.btnStyle2:hover {
+	color: #FFFFFF !important;
+	background: #F6B93B;
+	border-color: #600612 !important;
+	transition: all 0.2s ease 0s;
+}
+
+.nonDecoratedLink{
+	text-decoration: none;
+	color: #000000;
+}
+
+.standardDivsMessage{
+	border: 1px solid #494949;
+	background-color: rgba(96, 6, 18, .3);
+	padding: 5px;
+	width: 100%;
+	height: 120px;
+}
+
+.standardDivsLighter{
+	border: 1px solid #333333;
+	background-color: rgba(96, 6, 18, .2);
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 20px;
+	width: 98%;
+	padding: 5px;
+}
+
+.standardDivsDarker{
+	border: 1px solid #333333;
+	background-color: rgba(96, 6, 18, .9);
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 15px;
+	width: 93%;
+	padding: 5px;
+}
+
+.layoutHolder {
+	width:76.5%;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+.tblBoxLayout {
+	width: 100%;
+}
+
+.tblBoxLayout td {
+	width: 33%;
+	height: 100%;
+	padding: 5px;
+}
+
+.tblBoxLayout td a {
+	display: block;
+	width: 100%;
+	height: 220px;
+	border: 1px solid #333333;
+	background-color: rgba(255, 255, 255, .7);
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	font-weight: 600;
+	text-align: center;
+	text-decoration: none;
+	color: #600612;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.tblBoxLayout td a:hover{
+	color: #FFFFFF;
+	background-color: rgba(96, 6, 18, .3);
+	border: 3px solid #333333;
+}
+
+.iFrameStyle{
+	display: block;
+	width: 97.7%;
+	margin: 4px 4px 4px 4px;
+	border: 2px solid #000000;
+	overflow: auto;
+	padding: 0 6pt;
+	float: none;
+}
+
+.columnedTable { 
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.columnedTable caption { 
+  padding-bottom: 0.5em; 
+}
+
+.columnedTable thead {
+}
+
+.columnedTable th { 
+  font-weight: 600; 
+  border: solid thin lightgrey;
+  border-top: solid 3px #600612;
+  border-bottom: solid 3px #600612;  
+  vertical-align: top; 
+  text-align: center; 
+  padding: 0.5rem 2rem;
+  /*padding: 0.9em; */
+  /*background-color: #F4F4F4;*/
+}
+.columnedTable td {
+  white-space: wrap;
+  vertical-align: top;
+  padding: 5px;
+}
+
+.columnedTable tbody td:first-child::after { 
+  content: leader(". ");
+}
+
+.clear {
+    clear: both;
+}
+
+#jobListFilter .rowStyle1{
+	padding-right: 25px;
+}
+
+
+
+

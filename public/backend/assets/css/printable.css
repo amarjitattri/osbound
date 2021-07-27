@@ -1,0 +1,143 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+}
+
+.print_shell {
+    max-width: 980px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 0 10px;
+}
+
+.invoice_header {
+    border-bottom: 8px solid #600612;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+
+}
+
+.invoice_logo {
+    width: 100%;
+    max-width: 30%;
+    float: left;
+}
+
+.invoice_logo img {
+    width: 100%;
+}
+
+.address_email {
+    float: left;
+    padding-left: 20px;
+}
+
+ul.web_info {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    line-height: 17px;
+    font-size: 12px;
+}
+
+ul.web_info.add_with {
+    margin-bottom: 10px;
+}
+
+.invoice_no {
+    float: right;
+    max-width: 180px;
+    position: relative;
+    padding-top: 58px;
+}
+
+.invoice_no h2 {
+    margin-bottom: 0;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.qutation_to table.table.table_bord_0 td:nth-child(2) {
+    width: 20%;
+    text-align: right;
+}
+
+.qutation_to table.table.table_bord_0 td:last-child {
+    width: 20%;
+    padding-left: 20px;
+}
+
+span.title_bold {
+    font-weight: 700;
+}
+
+.description_to {
+    text-align: left;
+    margin-top: 20px;
+}
+
+.description_to th {
+    font-size: 16px;
+    font-weight: 700;
+    border-bottom: 4px solid #600612;
+    padding: 7px 0;
+}
+
+.description_to table.table.descr_table_bord_0 td:nth-child(2), .description_to table.table.descr_table_bord_0 th:nth-child(2) {
+    width: 15%;
+    text-align: right;
+}
+
+.description_to table.table.descr_table_bord_0 td:last-child, .description_to table.table.descr_table_bord_0 th:last-child {
+    width: 15%;
+    text-align: right;
+}
+
+.description_to table.table.descr_table_bord_0 td:first-child {
+    text-align: left !important;
+}
+
+span.small_note {
+    display: block;
+    text-align: center;
+    padding: 8px 0;
+    font-weight: 600;
+    font-size: 11px;
+}
+
+table.table.descr_table_bord_0 tfoot {
+    border-top: 4px solid #600612;
+}
+
+tfoot span.title_bold {
+    font-size: 16px;
+}
+
+.invoice_footer {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.invoice_footer p {
+    margin: 0;
+    padding: 0;
+    line-height: 18px;
+    font-size: 12px;
+}
+
+
+@media print {
+    .invoice_logo {
+        max-width: 40%;
+    }
+
+    .invoice_footer {
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        left: 0;
+    }
+}
