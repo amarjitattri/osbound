@@ -1,7 +1,7 @@
 @extends('layouts.backend')
 @section('content')
   <div class="card enquiry-card">
-    <div class="card-header">
+    {{-- <div class="card-header">
       @includeIf('backend.enquiries.filters')
     </div>
     <div class="card-block">
@@ -85,7 +85,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> --}}
   </div>
 @stop
 @section('models')
