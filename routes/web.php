@@ -22,10 +22,6 @@ Route::group(['middleware' => 'auth:web'], function () {
 
 
     // Client and contacts
-
-    //---Summary--
-
-    Route::get('clients-and-contacts/data', [ClientsAndContactsController::class, 'loadData'])->name('clients-and-contacts-data');
     Route::resource('clients-and-contacts', ClientsAndContactsController::class);
     
     
