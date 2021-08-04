@@ -1,6 +1,7 @@
 <?php
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\EnquiryController;
+use App\Http\Controllers\ClientsAndContactsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,6 +19,12 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => 'auth:web'], function () {
     Route::get('/dashboard', [LoginController::class, 'dashboard']);
 	Route::resource('enquiries', EnquiryController::class);
+
+
+    // Client and contacts
+    Route::resource('clients-and-contacts', ClientsAndContactsController::class);
+    
+    
     Route::get('/', [LoginController::class, 'dashboard']);
  });
 

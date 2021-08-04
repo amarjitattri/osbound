@@ -13,7 +13,7 @@ class EnquiryController extends Controller
      */
     public function index()
     {
-        //
+        return view('backend.enquiries.index', ['enquires' => [] , 'list' => []]);
     }
 
     /**

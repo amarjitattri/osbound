@@ -2,7 +2,7 @@
     <div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
     <div class="pcoded-inner-navbar main-menu">
         <ul class="pcoded-item pcoded-left-item">
-            <li class="{{ isActiveMenu('admin') }}">
+            <li class="{{ isActiveMenu('/') }}">
                 <a href="{{ url('/') }}">
                     <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                     <span class="pcoded-mtext">Dashboard</span>
@@ -48,6 +48,13 @@
                 <a href="#">
                     <span class="pcoded-micon"><i class="ti-home"></i><b>O</b></span>
                     <span class="pcoded-mtext">Invoices</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+            </li>
+            <li class="{{ isActiveMenu('clients-and-contacts') }}">
+                <a href="{{ route('clients-and-contacts.index') }}">
+                    <span class="pcoded-micon"><i class="ti-home"></i><b>O</b></span>
+                    <span class="pcoded-mtext">Clients-Contacts</span>
                     <span class="pcoded-mcaret"></span>
                 </a>
             </li>
