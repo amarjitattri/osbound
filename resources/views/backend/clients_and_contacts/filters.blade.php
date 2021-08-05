@@ -1,6 +1,6 @@
 <fieldset>
     <legend>Searches</legend>
-    <form autocomplete="off">
+    <form autocomplete="off" id="filter_form">
         <div class="row no-gutters mb-2">
             <div class="col-md-2 pr-1 py-1">
                 {!! Form::text('first_name', request('first_name'), ['class' => 'form-control form-control-sm','placeholder'=>'First Name']) !!}
@@ -9,18 +9,18 @@
                 {!! Form::text('last_name', request('last_name'), ['class' => 'form-control form-control-sm','placeholder'=>'Last Name']) !!}
             </div>
             <div class="col-md-2 pr-1 py-1">
-                <select class="custom-select custom-select-sm" name="client_id">
-                    <option value="">Client Name</option>
+                <select class="custom-select custom-select-sm" name="client_id" id="client_id">
+                    <option value="">Select Client Name</option>
                     @foreach ($all_clients as $client)
                         <option {{ request('client_id') == $client->id ? 'selected' : '' }} value="{{$client->id}}">{{$client->client_name}}</option>
                     @endforeach
                 </select>
             </div>
             <div class="col-md-1 pr-1 py-1 ml-auto">
-              <button type="submit" class="btn btn-sm btn-secondary btn-block">Search</button>
+              <button type="submit" class="btn btn-sm btn-secondary btn-block" id="filter_submit_button">Search</button>
             </div>
             <div class="col-md-1 pr-1 py-1">
-              <button type="reset" class="btn btn-sm btn-outline-secondary btn-block">Reset</button>
+              <button type="reset" class="btn btn-sm btn-outline-secondary btn-block" id="filter_reset_button">Reset</button>
             </div>
             <div class="col-md-2 py-1">
               <a href="#" data-modal-width="70%"
@@ -55,3 +55,39 @@
         </div> --}}
     </form>
 </fieldset>
+
+
+@section('customjs')
+
+@parent
+
+<script>
+    $('#filter_reset_button').click(function (){
+        console.log($('#filter_form input[type=text]'))
+        $('#filter_form select').val("-1");
+        // $('#filter_form').find('input:text').val('');
+        $('#filter_form').find(':input').each(function() {
+            switch(this.type) {
+                case 'password':
+                case 'text':
+                case 'textarea':
+                case 'file':
+                case 'select-one':
+                case 'select-multiple':
+                case 'date':
+                case 'number':
+                case 'tel':
+                case 'email':
+                    console.log('helo');
+                    jQuery(this).val('');
+                    break;
+                case 'checkbox':
+                case 'radio':
+                    this.checked = false;
+                    break;
+            }
+        });
+    });
+</script>
+
+@endsection

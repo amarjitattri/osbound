@@ -45,7 +45,24 @@
 @stop
 @section('customjs')
     @parent
-    
+    <script>
+        function getValues(){
+            return {
+                'first_name': $('input[name=first_name]').val(),
+                'last_name' : $('input[name=last_name]').val(),
+                'client_id': $('select#client_id').val()
+            }
+        }
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('#filter_submit_button').click(function(e) {
+                e.preventDefault();
+                page = 1;
+                loadMoreData(page);
+            })
+        });
+    </script>
     <script type="text/javascript">
         var page = 1;
         window.max_pages = 10;
@@ -61,8 +78,9 @@
     
     
         function loadMoreData(page){
-            const urlSearchParams = new URLSearchParams(window.location.search);
-            const params = Object.fromEntries(urlSearchParams.entries());
+            // const urlSearchParams = new URLSearchParams(window.location.search);
+            // const params = Object.fromEntries(urlSearchParams.entries());
+            const params = getValues() ?? {};
 
             $.ajax(
                 {
@@ -92,7 +110,7 @@
                                             <td>${body['client']['town'] ?? ''}</td>
                                             <td>${body['client']['country'] ?? ''}</td>
                                             <td>${body['client']['postal_code'] ?? ''}</td>
-                                            <td class="d-inline-flex"><a href="{{route('clients-and-contacts.index')}}/${body['client_id']}" class="btn btn-sm btn-primary mx-1">View</a>
+                                            <td class="d-inline-flex"><a href="{{route('clients-and-contacts.index')}}/${body['client_id']}" class="btn btn-sm btn-primary mx-1">Edit</a>
                                             <form action="{{route('clients-and-contacts.index')}}/${body['id']}" method="POST">
                                                 <input class="btn btn-sm btn-danger" type="submit" value="Delete" />
                                                 <input type="hidden" name="_method" value="delete" />
@@ -104,7 +122,7 @@
                     }
 
                     $('.ajax-load').hide();
-                    $("#tableData").append(html_data);
+                    (page==1) ? $("#tableData").html(html_data) : $("#tableData").append(html_data);
                 })
                 .fail(function(jqXHR, ajaxOptions, thrownError)
                 {

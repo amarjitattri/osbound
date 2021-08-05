@@ -76,10 +76,14 @@ class ClientsAndContactsController extends Controller
             else{
                 return redirect()->back()->withErrors(['msg', 'Client Id is required']);
             }
-
+            \Session::flash('type', 'success');
+            \Session::flash('message','Contact Details have been successfully submitted!');
             return redirect()->back();
         }
         
+        $validate = $request->validate([
+            'client_name' => 'required|unique:App\Models\Client,client_name'
+        ]);
         //For Client Storage
         $client_name = $request['client_name'];
 
@@ -99,18 +103,27 @@ class ClientsAndContactsController extends Controller
         //Building the relationship 
         $client->contacts()->save($contact);
 
+        \Session::flash('type', 'success');
+        \Session::flash('message','Client has been successfully created!');
         return redirect()->back();
         // return redirect()->route('');
 
 
     }
 
-    public function show($id){
+    public function show(Request $request, $id){
+        
+
+        if($request->ajax()){
+            return [
+                'contact_detail' => Contact::where(['id' => (request()->contact_id) , 'is_active' => 1])->first()->toArray() 
+            ];
+        }
 
         $all_clients = Client::where('is_active', 1)->get();
 
-        $contacts = Contact::where('client_id', $id)->orderBy('first_name' , 'asc')->get();
-
+        $contacts = Contact::where('client_id', $id)->where('is_active' , 1)->orderBy('first_name' , 'asc')->get();
+        
         return view('backend.clients_and_contacts.show' , [
                                                                 'all_clients' => $all_clients,   
                                                                 'contacts' => $contacts                                                     
@@ -136,6 +149,8 @@ class ClientsAndContactsController extends Controller
                     'postal_code' => $postal_code
                 ]);
 
+                \Session::flash('type', 'info');
+                \Session::flash('message','Client details have been successfully updated!');
             }
             else{
                 return redirect()->back()->withErrors(['msg', 'Client Id is required']);
@@ -166,6 +181,8 @@ class ClientsAndContactsController extends Controller
                     'telephone' => $telephone                        
                 ]);
 
+                \Session::flash('type', 'info');
+                \Session::flash('message','Contact details have been successfully updated!');
             }
             else{
                 return redirect()->back()->withErrors(['msg', 'Contact Id is required']);
@@ -184,6 +201,9 @@ class ClientsAndContactsController extends Controller
 
         $contact = Contact::find($id);
         $contact->delete();
+
+        \Session::flash('type', 'info');
+        \Session::flash('message','Contact with name as '.$contact['first_name']. ' has been deleted!');
         return redirect()->back();
     }
 }
