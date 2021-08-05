@@ -56,38 +56,3 @@
     </form>
 </fieldset>
 
-
-@section('customjs')
-
-@parent
-
-<script>
-    $('#filter_reset_button').click(function (){
-        console.log($('#filter_form input[type=text]'))
-        $('#filter_form select').val("-1");
-        // $('#filter_form').find('input:text').val('');
-        $('#filter_form').find(':input').each(function() {
-            switch(this.type) {
-                case 'password':
-                case 'text':
-                case 'textarea':
-                case 'file':
-                case 'select-one':
-                case 'select-multiple':
-                case 'date':
-                case 'number':
-                case 'tel':
-                case 'email':
-                    console.log('helo');
-                    jQuery(this).val('');
-                    break;
-                case 'checkbox':
-                case 'radio':
-                    this.checked = false;
-                    break;
-            }
-        });
-    });
-</script>
-
-@endsection
