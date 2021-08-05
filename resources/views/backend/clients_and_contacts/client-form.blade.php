@@ -9,7 +9,7 @@
     <div class="row my-3 py-1">
         <div class="col-md-6">
             <select class="custom-select custom-select-sm" name="client_id" id="select_client_id" onchange="changeSelectedPath()">
-                <option value="">Client Name</option>
+                <option value="" disabled>Select Client Name</option>
                 @foreach ($all_clients as $client)
                     <option {{ $client_id == $client->id ? 'selected' : '' }} value="{{$client->id}}">{{$client->client_name}}</option>
                 @endforeach

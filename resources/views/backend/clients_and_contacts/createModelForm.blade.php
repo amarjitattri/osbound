@@ -86,7 +86,19 @@
     submitHandler: function (form) {
       $(form).ajaxSubmit({
         resetForm: true,
-        target: "#company_contact_details_div"
+        error: function (res) {
+            let errorBucket = res.responseJSON.errors ?? [];
+            if(errorBucket){
+                Object.keys(errorBucket).forEach(function(val, index) {
+                    var $label = $("<label>").attr('id', val+'-servererror').attr('class','error').attr('for',val).text(errorBucket[val][0]);
+                    var $inputField = $("input[name="+val+"]");
+                    $label.insertAfter($inputField);
+                });
+            }
+        },
+        success: function (responseText, statusText, xhr, $form) {
+            location.href = "{{ route('clients-and-contacts.index') }}";
+        }
       });
       return false;
     }

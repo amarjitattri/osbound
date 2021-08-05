@@ -44,6 +44,7 @@
   <link rel="stylesheet" type="text/css" href="{{ asset('backend/assets/css/jquery.mCustomScrollbar.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ asset('backend/assets/css/toastr.min.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ asset('backend/bower_components/sweetalert/css/sweetalert.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('backend/assets/css/loading.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ asset('backend/assets/css/custom.css') }}">
   @yield('header')
   <script type="application/javascript">
@@ -53,12 +54,13 @@
   </script>
 </head>
 <body>
+<div id="loading"></div>
 <div id="pcoded" class="pcoded">
   <div class="pcoded-overlay-box"></div>
-  <div class="pcoded-container navbar-wrapper">
+  <div class="pcoded-container navbar-wrapper" >
     @include('partials.backend.topNavigation')
-    <div class="pcoded-main-container">
-      <div class="pcoded-wrapper">
+    <div class="pcoded-main-container" id="content_loading">
+      <div class="pcoded-wrapper" >
         @include('partials.backend.leftSideNavigation')
         <div class="pcoded-content">
           <div class="pcoded-inner-content">
@@ -118,6 +120,7 @@
 
 <script src="{{ asset('backend/bower_components/sweetalert/js/sweetalert.min.js') }}"></script>
 @yield('footer')
+<script type="text/javascript" src="{{ asset('backend/assets/js/loading.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/custom.js') }}"></script>
 <script>
   @if(Session::has('message'))
