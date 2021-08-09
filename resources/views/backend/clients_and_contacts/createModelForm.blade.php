@@ -97,7 +97,7 @@
             }
         },
         success: function (responseText, statusText, xhr, $form) {
-            location.href = "{{ route('clients-and-contacts.index') }}";
+            location.href = "{{ route('clients-and-contacts.index') }}" + "/" + responseText.id;
         }
       });
       return false;

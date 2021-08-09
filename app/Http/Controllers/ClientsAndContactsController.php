@@ -103,9 +103,16 @@ class ClientsAndContactsController extends Controller
         //Building the relationship 
         $client->contacts()->save($contact);
 
-        \Session::flash('type', 'success');
-        \Session::flash('message','Client has been successfully created!');
-        return redirect()->back();
+        if($request->ajax()){
+            return response()->json($client);
+        }
+        else{
+
+            \Session::flash('type', 'success');
+            \Session::flash('message','Client has been successfully created!');
+    
+            return redirect()->back();
+        }
         // return redirect()->route('');
 
 
