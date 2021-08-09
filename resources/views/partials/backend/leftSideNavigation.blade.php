@@ -10,7 +10,7 @@
                 </a>
             </li>
             <li class="{{ isActiveMenu(['enquiries','enquiries/create']) }}">
-                <a href="#">
+                <a href="{{ route('enquiries.index') }}">
                     <span class="pcoded-micon"><i class="ti-home"></i><b>E</b></span>
                     <span class="pcoded-mtext">Enquiries</span>
                     <span class="pcoded-mcaret"></span>

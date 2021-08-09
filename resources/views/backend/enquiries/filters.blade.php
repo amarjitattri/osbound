@@ -5,20 +5,23 @@
       <div class="col-md-2 pr-1">
         <select name="id" id="id" class="custom-select custom-select-sm">
           <option value="0">Job No</option>
-          @foreach ($enquires as $enquiry)
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          {{-- @foreach ($enquiries as $enquiry)
             <option
               value="{{$enquiry->id}}" {{ request('id') == $enquiry->id ? 'selected' : '' }}>{{$enquiry->enq_number}}</option>
-          @endforeach
+          @endforeach --}}
         </select>
       </div>
       <div class="col-md-2 pr-1">
         {!! Form::text('date_form', request('date_form'), ['class' => 'form-control form-control-sm datepicker','placeholder'=>'Date From']) !!}
       </div>
       <div class="col-md-2 pr-1">
-        {!! Form::select('contact', @$filteredNames , request('contact') , ['class' => 'custom-select custom-select-sm','placeholder'=>'Name']) !!}
+        {{-- {!! Form::select('contact', @$filteredNames , request('contact') , ['class' => 'custom-select custom-select-sm','placeholder'=>'Name']) !!} --}}
       </div>
       <div class="col-md-2 pr-1">
-        {!! Form::select('status', @$statues , request('status') , ['class' => 'custom-select custom-select-sm','placeholder'=>'Status']) !!}
+        {{-- {!! Form::select('status', @$statues , request('status') , ['class' => 'custom-select custom-select-sm','placeholder'=>'Status']) !!} --}}
       </div>
       <div class="col-md-2 pr-1">
 
@@ -32,16 +35,16 @@
     </div>
     <div class="row no-gutters">
       <div class="col-md-2 pr-1">
-        {!! Form::text('reminder_date', request('reminder_date'), ['class' => 'form-control form-control-sm datepicker','placeholder'=>'Reminders']) !!}
+        {{-- {!! Form::text('reminder_date', request('reminder_date'), ['class' => 'form-control form-control-sm datepicker','placeholder'=>'Reminders']) !!} --}}
       </div>
       <div class="col-md-2 pr-1">
         {!! Form::text('date_to', request('date_to'), ['class' => 'form-control form-control-sm datepicker','placeholder'=>'Date To']) !!}
       </div>
       <div class="col-md-2 pr-1">
-        {!! Form::select('company', @$filteredCompanies , request('company') , ['class' => 'custom-select custom-select-sm','placeholder'=>'Company']) !!}
+        {{-- {!! Form::select('company', @$filteredCompanies , request('company') , ['class' => 'custom-select custom-select-sm','placeholder'=>'Company']) !!} --}}
       </div>
       <div class="col-md-2 pr-1">
-        {!! Form::select('reason', $reasons , request('reason') , ['class' => 'custom-select custom-select-sm','placeholder'=>'Reason']) !!}
+        {{-- {!! Form::select('reason', $reasons , request('reason') , ['class' => 'custom-select custom-select-sm','placeholder'=>'Reason']) !!} --}}
       </div>
       <div class="col-md-2 pr-1">
 

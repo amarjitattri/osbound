@@ -13,7 +13,7 @@ class EnquiryController extends Controller
      */
     public function index()
     {
-        return view('backend.enquiries.index', ['enquires' => [] , 'list' => []]);
+        return view('backend.enquiries.index', ['enquiries' => [] , 'list' => []]);
     }
 
     /**
@@ -45,7 +45,7 @@ class EnquiryController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('backend.enquiries.show');
     }
 
     /**
@@ -56,7 +56,7 @@ class EnquiryController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('backend.enquiries.edit');
     }
 
     /**
