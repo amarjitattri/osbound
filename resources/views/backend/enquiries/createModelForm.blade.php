@@ -8,15 +8,33 @@
   <fieldset>
     <legend>Contact Details</legend>
     <div class="form-group row">
+      {{-- {!! Form::label('contact_id', 'Name',['class'=>'col-md-4 col-form-label']) !!}
+      <div class="col-md-8">
+        {!! Form::select('contact_id', $contacts,null, ['class' => 'custom-select custom-select-sm','placeholder'=>'--SELECT--','id'=>'edit_contact_name','data-route'=>route('getContactCompany'),'required']) !!}
+      </div> --}}
       {!! Form::label('contact_id', 'Name',['class'=>'col-md-4 col-form-label']) !!}
       <div class="col-md-8">
-        {!! Form::select('contact_id', $names,null, ['class' => 'custom-select custom-select-sm','placeholder'=>'--SELECT--','id'=>'edit_contact_name','data-route'=>route('getContactCompany'),'required']) !!}
+        <select class="custom-select custom-select-sm" name="contact_id" id="select_client_id" onchange="changeSelectedPath()">
+            <option value="" disabled>Name</option>
+            @foreach ($contacts as $contact)
+                <option {{ @$client_id == $contact->id ? 'selected' : '' }} value="{{$contact->id}}">{{$contact->first_name . ' ' . $contact->last_name}}</option>
+            @endforeach
+        </select>
       </div>
     </div>
     <div class="form-group row">
-      {!! Form::label('company_id', 'Company',['class'=>'col-md-4 col-form-label']) !!}
+      {{-- {!! Form::label('company_id', 'Company',['class'=>'col-md-4 col-form-label']) !!}
       <div class="col-md-8">
-        {!! Form::select('company_id', $companies, null, ['class' => 'custom-select custom-select-sm','placeholder'=>'--SELECT--','id'=>'edit_contact_company','data-route'=>route('getCompanyContactByNameIdContactId'),'required']) !!}
+        {!! Form::select('company_id', $clients, null, ['class' => 'custom-select custom-select-sm','placeholder'=>'--SELECT--','id'=>'edit_contact_company','data-route'=>route('getCompanyContactByNameIdContactId'),'required']) !!}
+      </div> --}}
+      {!! Form::label('client_id', 'Company',['class'=>'col-md-4 col-form-label']) !!}
+      <div class="col-md-8">
+        <select class="custom-select custom-select-sm" name="client_id" id="select_company_id" onchange="changeSelectedPath()">
+            <option value="" disabled>Company</option>
+            @foreach ($clients as $client)
+                <option {{ @$client_id == $client->id ? 'selected' : '' }} value="{{$client->id}}">{{$client->client_name}}</option>
+            @endforeach
+        </select>
       </div>
     </div>
     <div class="form-group float-right">
@@ -26,23 +44,23 @@
     </div>
   </fieldset>
 </div>
-<input type="hidden" name="company_id" id="contact_company_id" required>
-<input type="hidden" name="contact_id" id="contact_name_id" required>
+{{-- <input type="hidden" name="company_id" id="contact_company_id" required>
+<input type="hidden" name="contact_id" id="contact_name_id" required> --}}
 {!! Form::close() !!}
-{!! Form::open(['route' => 'company_contacts.store','method' => 'post','id'=>'company_contacts_form']) !!}
+{!! Form::open(['route' => 'clients-and-contacts.store','method' => 'post','id'=>'company_contacts_form']) !!}
 <fieldset>
   <legend>Add Contact</legend>
   <label id="company_contact_error" class="error" style="display: none"></label>
   <div class="form-group row no">
-    {!! Form::label('name', 'Name',['class'=>'col-md-4 pr-0 col-form-label']) !!}
+    {!! Form::label('contact_name', 'Name',['class'=>'col-md-4 pr-0 col-form-label']) !!}
     <div class="col-md-8">
-      {!! Form::text('name',  null, ['class' => 'form-control form-control-sm','required']) !!}
+      {!! Form::text('contact_name',  null, ['class' => 'form-control form-control-sm','required']) !!}
     </div>
   </div>
   <div class="form-group row">
-    {!! Form::label('company', 'Company',['class'=>'col-md-4 pr-0 col-form-label']) !!}
+    {!! Form::label('client_name', 'Company',['class'=>'col-md-4 pr-0 col-form-label']) !!}
     <div class="col-md-8">
-      {!! Form::text('company',  null, ['class' => 'form-control form-control-sm','required']) !!}
+      {!! Form::text('client_name',  null, ['class' => 'form-control form-control-sm','required']) !!}
     </div>
   </div>
   <div class="form-group row">
@@ -64,21 +82,21 @@
     </div>
   </div>
   <div class="form-group row">
-    {!! Form::label('address_line1', 'Address Line 1',['class'=>'col-md-4 col-form-label']) !!}
+    {!! Form::label('address_line_1', 'Address Line 1',['class'=>'col-md-4 col-form-label']) !!}
     <div class="col-md-8">
-      {!! Form::text('address_line1', null, ['class' => 'form-control form-control-sm','required']) !!}
+      {!! Form::text('address_line_1', null, ['class' => 'form-control form-control-sm','required']) !!}
     </div>
   </div>
   <div class="form-group row">
-    {!! Form::label('address_line2', 'Address Line 2',['class'=>'col-md-4 col-form-label']) !!}
+    {!! Form::label('address_line_2', 'Address Line 2',['class'=>'col-md-4 col-form-label']) !!}
     <div class="col-md-8">
-      {!! Form::text('address_line2', null, ['class' => 'form-control form-control-sm']) !!}
+      {!! Form::text('address_line_2', null, ['class' => 'form-control form-control-sm']) !!}
     </div>
   </div>
   <div class="form-group row">
-    {!! Form::label('county', 'County',['class'=>'col-md-4 col-form-label']) !!}
+    {!! Form::label('country', 'Country',['class'=>'col-md-4 col-form-label']) !!}
     <div class="col-md-8">
-      {!! Form::text('county', null, ['class' => 'form-control form-control-sm','required']) !!}
+      {!! Form::text('country', null, ['class' => 'form-control form-control-sm','required']) !!}
     </div>
   </div>
   <div class="form-group row">
@@ -140,7 +158,19 @@
     submitHandler: function (form) {
       $(form).ajaxSubmit({
         resetForm: true,
-        target: "#company_contact_details_div"
+        error: function (res) {
+            let errorBucket = res.responseJSON.errors ?? [];
+            if(errorBucket){
+                Object.keys(errorBucket).forEach(function(val, index) {
+                    var $label = $("<label>").attr('id', val+'-servererror').attr('class','error').attr('for',val).text(errorBucket[val][0]);
+                    var $inputField = $("input[name="+val+"]");
+                    $label.insertAfter($inputField);
+                });
+            }
+        },
+        success: function (responseText, statusText, xhr, $form) {
+            // location.href = "{{ route('clients-and-contacts.index') }}" + "/" + responseText.id;
+        }
       });
       return false;
     }

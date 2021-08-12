@@ -1,8 +1,11 @@
 @extends('layouts.backend')
+@php
+ $baseRoute = 'enquiries';
+@endphp
 @section('content')
   <div class="card card-border-primary">
     <div class="card-header card-header">
-      <div class="row">
+      {{-- <div class="row">
         <div class="col-md-4">
           <div class="ot-enq_num_dat">
             <span class="ot-left ot-enq_number">
@@ -27,7 +30,7 @@
             <button type="button" class="btn btn-sm btn-primary btn-ot" id="updateEnquiryBtn"> Save Enquiry</button>
           </div>
         </div>
-      </div>
+      </div> --}}
     </div>
     <div class="card-block">
       {!! Form::model($oldData, ['route' => [$baseRoute.'.update', $oldData->id], 'method' => 'post','files' => true,'id'=>'updateEnquiryForm','autocomplete'=>'off']) !!}
@@ -36,12 +39,12 @@
         <div class="col-md-4">
           <div class="form-row">
             <div class="col-md-12" id="company_contact_details_div">
-              @includeIf('backend.shared.company_contact')
+              {{-- @includeIf('backend.shared.company_contact') --}}
             </div>
           </div>
           <div class="form-row">
             <div class="col-md-12">
-              @includeIf('backend.shared.administratorForm')
+              {{-- @includeIf('backend.shared.administratorForm') --}}
             </div>
           </div>
         </div>
@@ -60,7 +63,7 @@
       </div>
       <div class="row">
         <div class="col-md-12">
-          @includeIf('backend.enquiries.inner.general_enquiry_questions')
+          {{-- @includeIf('backend.enquiries.inner.general_enquiry_questions') --}}
         </div>
       </div>
       <div class="row">

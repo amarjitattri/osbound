@@ -88,17 +88,54 @@ class ClientsAndContactsController extends Controller
         $client_name = $request['client_name'];
 
         //For Contact Storage
-        $first_name = $request['first_name'];
-        $last_name = $request['last_name'];
-        $job_title = $request['job_title'];
+        if(@$request['contact_name']){
+
+            $contact_name = $request['contact_name'];
+            $parts = explode(" ", $contact_name);
+
+            if(count($parts) > 1) {
+                $last_name = array_pop($parts);
+                $first_name = implode(" ", $parts);
+            }
+            else
+            {
+                $first_name = $contact_name;
+                $last_name = null;
+            }
+        }
+        else{
+            $first_name = $request['first_name'] ?? null;
+            $last_name = $request['last_name'] ?? null;
+        }
+        
+        $job_title = $request['job_title'] ?? null;
+        $telephone = $request['telephone'] ?? null;
+        $mobile = $request['mobile'] ?? null;
+        $email = $request['email'] ?? null;
+        $address_line_1 = $request['address_line_1'] ?? null;
+        $address_line_2 = $request['address_line_2'] ?? null;
+        $town = $request['town'] ?? null;
+        $country = $request['country'] ?? null;
+        $postal_code = $request['postal_code'] ?? null;
+
 
         $contact = new Contact([
-                            'first_name' => $first_name,
-                            'last_name' => $last_name,
-                            'job_title' => $job_title                        
-                        ]);
+                                'first_name' => $first_name,
+                                'last_name' => $last_name,
+                                'job_title' => $job_title,                        
+                                'email' => $email,                        
+                                'mobile' => $mobile,                        
+                                'telephone' => $telephone,                        
+                            ]);
         
-        $client = Client::create(['client_name' => $client_name]);
+        $client = Client::create([
+                                    'client_name' => $client_name,
+                                    'address_line_1' => $address_line_1,
+                                    'address_line_2' => $address_line_2,
+                                    'town' => $town,
+                                    'country' => $country,
+                                    'postal_code' => $postal_code,
+                                ]);
         
         //Building the relationship 
         $client->contacts()->save($contact);

@@ -4,113 +4,113 @@
 $pageName= "Enquiries";
 $baseRoute= "enquiries";
 
-$tableData = collect([
-  [
-    'enq_number' => '123',
-    'enq_date' => '03/03/2121',
-    'contact_name' => 'Contact',
-    'company_name' => 'company_name',
-    'email' => 'Email',
-    'mobile' => '21312312',
-    'telephone' => '1231232',
-    'reminder_date' => '09/21/12',
-    'snooze' => '123122',
-    'description' => 'asfdasdfasdfdfadas',
-    'reason' => 'asdfafdsafsdfasf',
-    'status'=> 1,
-    'id' => 1
-],
-  [
-    'enq_number' => '123',
-    'enq_date' => '03/03/2121',
-    'contact_name' => 'Contact',
-    'company_name' => 'company_name',
-    'email' => 'Email',
-    'mobile' => '21312312',
-    'telephone' => '1231232',
-    'reminder_date' => '09/21/12',
-    'snooze' => '123122',
-    'description' => 'asfdasdfasdfdfadas',
-    'reason' => 'asdfafdsafsdfasf',
-    'status'=> 1,
-    'id' => 1
-],
-  [
-    'enq_number' => '123',
-    'enq_date' => '03/03/2121',
-    'contact_name' => 'Contact',
-    'company_name' => 'company_name',
-    'email' => 'Email',
-    'mobile' => '21312312',
-    'telephone' => '1231232',
-    'reminder_date' => '09/21/12',
-    'snooze' => '123122',
-    'description' => 'asfdasdfasdfdfadas',
-    'reason' => 'asdfafdsafsdfasf',
-    'status'=> 1,
-    'id' => 1
-],
-  [
-    'enq_number' => '123',
-    'enq_date' => '03/03/2121',
-    'contact_name' => 'Contact',
-    'company_name' => 'company_name',
-    'email' => 'Email',
-    'mobile' => '21312312',
-    'telephone' => '1231232',
-    'reminder_date' => '09/21/12',
-    'snooze' => '123122',
-    'description' => 'asfdasdfasdfdfadas',
-    'reason' => 'asdfafdsafsdfasf',
-    'status'=> 1,
-    'id' => 1
-],
-  [
-    'enq_number' => '123',
-    'enq_date' => '03/03/2121',
-    'contact_name' => 'Contact',
-    'company_name' => 'company_name',
-    'email' => 'Email',
-    'mobile' => '21312312',
-    'telephone' => '1231232',
-    'reminder_date' => '09/21/12',
-    'snooze' => '123122',
-    'description' => 'asfdasdfasdfdfadas',
-    'reason' => 'asdfafdsafsdfasf',
-    'status'=> 1,
-    'id' => 1
-],
-  [
-    'enq_number' => '123',
-    'enq_date' => '03/03/2121',
-    'contact_name' => 'Contact',
-    'company_name' => 'company_name',
-    'email' => 'Email',
-    'mobile' => '21312312',
-    'telephone' => '1231232',
-    'reminder_date' => '09/21/12',
-    'snooze' => '123122',
-    'description' => 'asfdasdfasdfdfadas',
-    'reason' => 'asdfafdsafsdfasf',
-    'status'=> 1,
-    'id' => 1
-],
-  [
-    'enq_number' => '123',
-    'enq_date' => '03/03/2121',
-    'contact_name' => 'Contact',
-    'company_name' => 'company_name',
-    'email' => 'Email',
-    'mobile' => '21312312',
-    'telephone' => '1231232',
-    'reminder_date' => '09/21/12',
-    'snooze' => '123122',
-    'description' => 'asfdasdfasdfdfadas',
-    'reason' => 'asdfafdsafsdfasf',
-    'status'=> 1,
-    'id' => 1
-],
-]);
+// $tableData = collect([
+//   [
+//     'enq_number' => '123',
+//     'enq_date' => '03/03/2121',
+//     'contact_name' => 'Contact',
+//     'company_name' => 'company_name',
+//     'email' => 'Email',
+//     'mobile' => '21312312',
+//     'telephone' => '1231232',
+//     'reminder_date' => '09/21/12',
+//     'snooze' => '123122',
+//     'description' => 'asfdasdfasdfdfadas',
+//     'reason' => 'asdfafdsafsdfasf',
+//     'status'=> 1,
+//     'id' => 1
+// ],
+//   [
+//     'enq_number' => '123',
+//     'enq_date' => '03/03/2121',
+//     'contact_name' => 'Contact',
+//     'company_name' => 'company_name',
+//     'email' => 'Email',
+//     'mobile' => '21312312',
+//     'telephone' => '1231232',
+//     'reminder_date' => '09/21/12',
+//     'snooze' => '123122',
+//     'description' => 'asfdasdfasdfdfadas',
+//     'reason' => 'asdfafdsafsdfasf',
+//     'status'=> 1,
+//     'id' => 1
+// ],
+//   [
+//     'enq_number' => '123',
+//     'enq_date' => '03/03/2121',
+//     'contact_name' => 'Contact',
+//     'company_name' => 'company_name',
+//     'email' => 'Email',
+//     'mobile' => '21312312',
+//     'telephone' => '1231232',
+//     'reminder_date' => '09/21/12',
+//     'snooze' => '123122',
+//     'description' => 'asfdasdfasdfdfadas',
+//     'reason' => 'asdfafdsafsdfasf',
+//     'status'=> 1,
+//     'id' => 1
+// ],
+//   [
+//     'enq_number' => '123',
+//     'enq_date' => '03/03/2121',
+//     'contact_name' => 'Contact',
+//     'company_name' => 'company_name',
+//     'email' => 'Email',
+//     'mobile' => '21312312',
+//     'telephone' => '1231232',
+//     'reminder_date' => '09/21/12',
+//     'snooze' => '123122',
+//     'description' => 'asfdasdfasdfdfadas',
+//     'reason' => 'asdfafdsafsdfasf',
+//     'status'=> 1,
+//     'id' => 1
+// ],
+//   [
+//     'enq_number' => '123',
+//     'enq_date' => '03/03/2121',
+//     'contact_name' => 'Contact',
+//     'company_name' => 'company_name',
+//     'email' => 'Email',
+//     'mobile' => '21312312',
+//     'telephone' => '1231232',
+//     'reminder_date' => '09/21/12',
+//     'snooze' => '123122',
+//     'description' => 'asfdasdfasdfdfadas',
+//     'reason' => 'asdfafdsafsdfasf',
+//     'status'=> 1,
+//     'id' => 1
+// ],
+//   [
+//     'enq_number' => '123',
+//     'enq_date' => '03/03/2121',
+//     'contact_name' => 'Contact',
+//     'company_name' => 'company_name',
+//     'email' => 'Email',
+//     'mobile' => '21312312',
+//     'telephone' => '1231232',
+//     'reminder_date' => '09/21/12',
+//     'snooze' => '123122',
+//     'description' => 'asfdasdfasdfdfadas',
+//     'reason' => 'asdfafdsafsdfasf',
+//     'status'=> 1,
+//     'id' => 1
+// ],
+//   [
+//     'enq_number' => '123',
+//     'enq_date' => '03/03/2121',
+//     'contact_name' => 'Contact',
+//     'company_name' => 'company_name',
+//     'email' => 'Email',
+//     'mobile' => '21312312',
+//     'telephone' => '1231232',
+//     'reminder_date' => '09/21/12',
+//     'snooze' => '123122',
+//     'description' => 'asfdasdfasdfdfadas',
+//     'reason' => 'asdfafdsafsdfasf',
+//     'status'=> 1,
+//     'id' => 1
+// ],
+// ]);
 @endphp
 @section('content')
   <div class="card enquiry-card">
@@ -120,13 +120,13 @@ $tableData = collect([
     <div class="card-block">
       <div class="row enquires">
         <div class="col-md-9 enquiry-left scroll">
-          <div class="row no-gutters">
+          <div class="row no-gutters" id="tableData">
             @if($tableData->count())
               @foreach ($tableData as $val)
                 <div class="col-md-6">
                   <div class="card">
                     <div class="card-header b-b-default">
-                      <h5>{{$val['enq_number']}}</h5>
+                      <h5>{{$val['job_no']}}</h5>
                       <div class="card-header-right">
                         {{$val['enq_date']}}
                       </div>
@@ -134,10 +134,10 @@ $tableData = collect([
                     <div class="card-block">
                       <div class="row no-gutters">
                         <div class="col-md-4">
-                          <span class="ot-name text-left">{{$val['contact_name']}}</span>
+                          <span class="ot-name text-left">{{$val['first_name'] . $val['last_name']}}</span>
                         </div>
                         <div class="col-md-4">
-                          <span class="ot-company">{{$val['company_name']}}</span>
+                          <span class="ot-company">{{$val['client_name']}}</span>
                         </div>
                         <div class="col-md-4 text-right">
                           <span class="ot-email">{{$val['email']}}</span>
@@ -204,6 +204,94 @@ $tableData = collect([
 @section('models')
   @include('backend.shared.model')
 @endsection
+{{-- @section('customjs')
+    @parent
+    <script>
+        function getValues(){
+            return {
+                'first_name': $('input[name=first_name]').val(),
+                'last_name' : $('input[name=last_name]').val(),
+                'client_id': $('select#client_id').val()
+            }
+        }
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('#filter_submit_button').click(function(e) {
+                e.preventDefault();
+                page = 1;
+                loadMoreData(page);
+            })
+        });
+    </script>
+    <script type="text/javascript">
+        var page = 1;
+        window.max_pages = 10;
+        loadMoreData(page);
+        // console.log(params);
+        $(window).scroll(function() {
+            if($(window).scrollTop() + $(window).height() >= $(document).height()) {
+            // if($(document).height() - $(this).height() - 100 < $(this).scrollTop()) {
+                page++;
+                if(page <= window.max_pages) loadMoreData(page);
+            }
+        });
+    
+    
+        function loadMoreData(page){
+            // const urlSearchParams = new URLSearchParams(window.location.search);
+            // const params = Object.fromEntries(urlSearchParams.entries());
+            const params = getValues() ?? {};
+
+            $.ajax(
+                {
+                    url: "{{ route('clients-and-contacts.index') }}" + '?first_name=' + ((params.first_name) ? params.first_name : '') +  '&last_name=' +((params.last_name) ? params.last_name : '') + '&client_id=' + ((params.client_id) ? params.client_id : '') + '&page=' + page,
+                    type: "get",
+                    beforeSend: function()
+                    {
+                        $('.ajax-load').show();
+                    }
+                })
+                .done(function(data)
+                {
+                    window.max_pages = data.contacts_with_clients.last_page;
+                    var html_data = '';
+                    var csrf_token = "{{ csrf_token() }}";
+
+                    if((data.contacts_with_clients.data) && (data.contacts_with_clients.data.length)){
+                        data.contacts_with_clients.data.forEach(function(body, th){
+                            html_data += `<tr>
+                                            <td>${(body['first_name']) ?? ''} ${(body['last_name']) ?? ''}</td>
+                                            <td>${body['job_title'] ?? ''}</td>
+                                            <td>${body['email'] ?? ''}</td>
+                                            <td>${body['mobile'] ?? ''}</td>
+                                            <td>${body['telephone'] ?? ''}</td>
+                                            <td>${body['client']['client_name'] ?? ''}</td>
+                                            <td>${body['client']['address_line_1'] ?? ''}</td>
+                                            <td>${body['client']['town'] ?? ''}</td>
+                                            <td>${body['client']['country'] ?? ''}</td>
+                                            <td>${body['client']['postal_code'] ?? ''}</td>
+                                            <td class="d-inline-flex"><a href="{{route('clients-and-contacts.index')}}/${body['client_id']}" class="btn btn-sm btn-primary mx-1">Edit</a>
+                                            <form action="{{route('clients-and-contacts.index')}}/${body['id']}" method="POST">
+                                                <input class="btn btn-sm btn-danger" type="submit" value="Delete" />
+                                                <input type="hidden" name="_method" value="delete" />
+                                                <input type="hidden" name="_token" value="${csrf_token}">
+                                            </form>
+                                        </td>
+                                    </tr>`;
+                        });
+                    }
+
+                    $('.ajax-load').hide();
+                    (page==1) ? $("#tableData").html(html_data) : $("#tableData").append(html_data);
+                })
+                .fail(function(jqXHR, ajaxOptions, thrownError)
+                {
+                      alert('server not responding...');
+                });
+        }
+    </script>
+@endsection --}}
 @section('customjs')
   @parent
   <script>
