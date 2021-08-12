@@ -106,9 +106,13 @@ $(function () {
 function uploadRecording() {
     msgLog("Upload Button Clicked...");
     let form_data_files = new FormData(), filename = new Date().toISOString();
-    form_data_files.append("file", blobFile);
+    let btnUploadRecording = $('#btn_upload_recoding');
+    form_data_files.append("audio_files[0]", blobFile);
     form_data_files.append("file_name", filename);
     form_data_files.append('_token', $('meta[name="_token"]').attr('content'));
+    (btnUploadRecording.attr('data-job') !== undefined) ? form_data_files.append("job_id", btnUploadRecording.attr('data-job')) : null;
+    (btnUploadRecording.attr('data-media') !== undefined) ? form_data_files.append("media_from", btnUploadRecording.attr('data-media')) : null;
+    
     $.ajax({
         type: 'POST',
         url: $('#btn_upload_recoding').attr('data-route'),
@@ -121,7 +125,7 @@ function uploadRecording() {
         },
         success: function (res) {
             $(`#_files`).val('');
-            $(`#audioPlayerContainer`).html(res);
+            $(`#audioPlayerContainer`).parent().html(res);
         },
         complete: function () {
             changeBtnState('uploaded');

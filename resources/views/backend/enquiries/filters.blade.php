@@ -3,22 +3,26 @@
   <form autocomplete="off">
     <div class="row no-gutters mb-2">
       <div class="col-md-2 pr-1">
-        <select name="id" id="id" class="custom-select custom-select-sm">
+        <select name="job_no" id="job_no" class="custom-select custom-select-sm">
           <option value="0">Job No</option>
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          {{-- @foreach ($enquiries as $enquiry)
+          @foreach ($enquiries as $enquiry)
             <option
-              value="{{$enquiry->id}}" {{ request('id') == $enquiry->id ? 'selected' : '' }}>{{$enquiry->enq_number}}</option>
-          @endforeach --}}
+              value="{{$enquiry['job_no']}}" {{ request('job_no') == $enquiry->job_no ? 'selected' : '' }}>{{$enquiry['job_no']}}</option>
+          @endforeach
         </select>
       </div>
       <div class="col-md-2 pr-1">
         {!! Form::text('date_form', request('date_form'), ['class' => 'form-control form-control-sm datepicker','placeholder'=>'Date From']) !!}
       </div>
       <div class="col-md-2 pr-1">
-        {{-- {!! Form::select('contact', @$filteredNames , request('contact') , ['class' => 'custom-select custom-select-sm','placeholder'=>'Name']) !!} --}}
+        <select name="contact_id" id="contact_id" class="custom-select custom-select-sm">
+          <option value="">Contact Name</option>
+          @foreach ($contacts as $contact)
+            <option
+              value="{{$contact['id']}}" {{ request('contact_id') == $contact->id ? 'selected' : '' }}>{{$contact['first_name'].' '.$contact['last_name']}}</option>
+          @endforeach
+        </select>
+        {{-- {!! Form::select('contact_name', @$contacts , request('contact') , ['class' => 'custom-select custom-select-sm','placeholder'=>'Name']) !!} --}}
       </div>
       <div class="col-md-2 pr-1">
         {{-- {!! Form::select('status', @$statues , request('status') , ['class' => 'custom-select custom-select-sm','placeholder'=>'Status']) !!} --}}
@@ -41,6 +45,14 @@
         {!! Form::text('date_to', request('date_to'), ['class' => 'form-control form-control-sm datepicker','placeholder'=>'Date To']) !!}
       </div>
       <div class="col-md-2 pr-1">
+        
+        <select name="cliwnt_id" id="cliwnt_id" class="custom-select custom-select-sm">
+          <option value="">Client Name</option>
+          @foreach ($clients as $client)
+            <option
+              value="{{$client['id']}}" {{ request('client_id') == $client->id ? 'selected' : '' }}>{{$client['client_name']}}</option>
+          @endforeach
+        </select>
         {{-- {!! Form::select('company', @$filteredCompanies , request('company') , ['class' => 'custom-select custom-select-sm','placeholder'=>'Company']) !!} --}}
       </div>
       <div class="col-md-2 pr-1">

@@ -1,46 +1,43 @@
-<fieldset>
-    <legend>Images</legend>
-    <div class="row">
-        <div class="col-md-5">
-            <div class="form-row">
-                <div class="col-md-12 image_files_upload">
-                    <div class="custom-file">
-                        <input type="file" class="custom-file-input media_upload" id="image_files"
-                               data-type="1" data-enquiry="{{$oldData->id}}"
-                               data-route="{{route('uploadMediaFiles',$oldData->id)}}"
-                               data-target="imageViewerContainer" name="image_files[]"
-                               accept="image/*" multiple>
-                        <label class="custom-file-label" for="customFile">Add image file</label>
-                    </div>
-                    <span class="file_loader"><img src="{{asset('images/ajax-loader.gif')}}" class="img-responsive" alt=""></span>
+<div class="row" id="imageViewerContainer">
+    <div class="col-md-12">
+        <div class="form-row">
+            <div class="col-md-12 image_files_upload">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input media_upload" id="image_files"
+                    data-type="1" data-job="{{$job_data->id}}"
+                    data-route="{{route('medias.store')}}"
+                    data-target="imageViewerContainer" name="image_files[]"
+                    accept="image/*" multiple>
+                <label class="custom-file-label" for="customFile">Add image file</label>
                 </div>
+                <span class="file_loader"><img src="{{asset('images/ajax-loader.gif')}}" class="img-responsive" alt=""></span>
             </div>
-            <ul class="enquiry_image_thumb set-width image_thumb_grid scroll">
-                @if ($oldData->images()->count())
-                    @foreach ($oldData->images() as $image)
-                        <li data-src="{{$image->url}}" id="image_li_{{$image->media_id}}">
-                            <div class="enquiry_inner set-bg"
-                                 style="background: url('{{$image->url}}')">
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox"
-                                           class="custom-control-input selected_images"
-                                           id="image_checkbox_{{$image->media_id}}"
-                                           value="{{$image->media_id}}">
-                                    <label class="custom-control-label"
-                                           for="image_checkbox_{{$image->media_id}}"></label>
-                                </div>
-                            </div>
-                        </li>
-                    @endforeach
-                @else
-                    <h5 class="p-t-50 p-b-50 m-auto">Images Not Found</h5>
-                @endif
-            </ul>
-            <button class="btn btn-sm btn-danger btn-block delete_selected_images" type="button" disabled
-                    id="delete_selected_images">Delete Selected Image
-            </button>
         </div>
-        <div class="col-md-7">
+        <ul class="enquiry_image_thumb set-width image_thumb_grid scroll">
+            @if ($job_data->images()->count())
+                @foreach ($job_data->images()->get() as $image)
+                    <li data-src="{{asset($image->path)}}" id="image_li_{{$image->id}}">
+                        <div class="enquiry_inner set-bg"
+                                style="background: url('{{asset($image->path)}}')">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox"
+                                        class="custom-control-input selected_images"
+                                        id="image_checkbox_{{$image->id}}"
+                                        value="{{$image->id}}">
+                                <label class="custom-control-label"
+                                        for="image_checkbox_{{$image->id}}"></label>
+                            </div>
+                        </div>
+                    </li>
+                @endforeach
+            @else
+                <h5 class="p-t-50 p-b-50 m-auto">Images Not Found</h5>
+            @endif
+        </ul>
+        <button class="btn btn-sm btn-danger btn-block delete_selected_images"
+            type="button" disabled id="delete_selected_images">Delete Selected Image
+        </button>
+        <div id="imageViewerContainer" class="my-4">
             <ul class="enquiry_image_preview">
                 <li>
                     <div class="preview-inner set-bg" id="preview_image_section" style="background: url('{{asset('images/no_image.png')}}');"></div>
@@ -48,7 +45,7 @@
             </ul>
         </div>
     </div>
-</fieldset>
+</div>
 @section('customjs')
     @parent
     <script>
@@ -60,11 +57,12 @@
                     return this.value;
                 }).get().join();
                 $.ajax({
-                    url: "{{route('enquiryMediaDelete',1)}}",
+                    url: "{{route('medias.destroyMultiple')}}",
                     type: 'DELETE',
                     data: {
                         _method: 'DELETE',
                         _token: '{{ csrf_token() }}',
+                        media_from: 'jobs',
                         media_ids: mediaIds
                     },
                     beforeSend: function () {
@@ -87,7 +85,7 @@
             }
         });
         $(document).on('change', '.media_upload', function (e) {
-            let form_data_files = new FormData(), type = $(this).data('type'), enquiry = $(this).data('enquiry'),
+            let form_data_files = new FormData(), type = $(this).data('type'), job_id = $(this).data('job'),
                 route = $(this).data('route'),
                 target = $(this).data('target'), file_id = type === 1 ? 'image' : 'audio',
                 input_file = $(`#${file_id}_files`)[0], totalFiles = input_file.files.length;
@@ -95,6 +93,8 @@
                 form_data_files.append(`${file_id}_files[]`, input_file.files[i]);
             }
             form_data_files.append('type', type);
+            form_data_files.append('media_from', 'jobs');
+            form_data_files.append('job_id', job_id);
             form_data_files.append('_token', '{{ csrf_token() }}');
 
             $.ajax({
@@ -109,7 +109,7 @@
                 success: function (res) {
                     $(`#${file_id}_files`).val('');
                     $(`#${file_id}_files`).siblings(".custom-file-label").html(`Choose ${file_id} file`);
-                    $(`#${target}`).html(res);
+                    $(`#${target}`).parent().html(res);
                 },
                 complete: function () {
                     $(`#${file_id}_files`).parent().siblings(".file_loader").hide()
