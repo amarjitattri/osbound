@@ -14,8 +14,8 @@
       </div> --}}
       {!! Form::label('contact_id', 'Name',['class'=>'col-md-4 col-form-label']) !!}
       <div class="col-md-8">
-        <select class="custom-select custom-select-sm" name="contact_id" id="select_client_id" onchange="changeSelectedPath()">
-            <option value="" disabled>Name</option>
+        <select class="custom-select custom-select-sm" name="contact_id" id="select_contact_id" data-route="{{ route('enquiries.create') }}" required>
+            <option value="">-- Select Name--</option>
             @foreach ($contacts as $contact)
                 <option {{ @$client_id == $contact->id ? 'selected' : '' }} value="{{$contact->id}}">{{$contact->first_name . ' ' . $contact->last_name}}</option>
             @endforeach
@@ -29,8 +29,8 @@
       </div> --}}
       {!! Form::label('client_id', 'Company',['class'=>'col-md-4 col-form-label']) !!}
       <div class="col-md-8">
-        <select class="custom-select custom-select-sm" name="client_id" id="select_company_id" onchange="changeSelectedPath()">
-            <option value="" disabled>Company</option>
+        <select class="custom-select custom-select-sm" name="client_id" id="select_client_id" data-route="{{ route('enquiries.create') }}" required>
+            <option value="">--Select Company--</option>
             @foreach ($clients as $client)
                 <option {{ @$client_id == $client->id ? 'selected' : '' }} value="{{$client->id}}">{{$client->client_name}}</option>
             @endforeach
@@ -38,7 +38,7 @@
       </div>
     </div>
     <div class="form-group float-right">
-      <button class="btn btn-sm btn-primary" type="button" id="contact_company_reset_btn">Reset
+      <button class="btn btn-sm btn-primary" type="button" id="contact_company_reset_btn" data-route="{{ route('enquiries.create')}}">Reset
         Lists
       </button>
     </div>
@@ -66,7 +66,7 @@
   <div class="form-group row">
     {!! Form::label('telephone', 'Telephone',['class'=>'col-md-4 pr-0 col-form-label']) !!}
     <div class="col-md-8">
-      {!! Form::text('telephone', null, ['class' => 'form-control form-control-sm']) !!}
+      {!! Form::text('telephone', null, ['class' => 'form-control form-control-sm', 'required']) !!}
     </div>
   </div>
   <div class="form-group row">
@@ -117,39 +117,65 @@
 </div>
 
 <script>
-  $(document).on('change', '#edit_contact_name', function () {
+  $(document).on('change', '#select_contact_id', function () {
     let cnval = $(this).val();
     $.get($(this).data('route'), {
-      name: $(this).find('option:selected').text()
+      filter: 1,
+      contact_id: cnval
     }, function (data) {
-      $(document).find("#edit_contact_company").html('<option value="0">--SELECT--</option>');
-      $.each(data, function (i, v) {
-        $(document).find("#edit_contact_company").append('<option value="' + v.id + '">' + v.company + '</option>');
+      $(document).find("#select_client_id").html('<option value="" disabled>--Select Company--</option>');
+      $.each(data.contacts, function (i, v) {
+        $(document).find("#select_client_id").append('<option value="' + v.client.id + '" selected>' + v.client.client_name + '</option>');
       });
-      if ($("#contact_name_id").length) {
-        $("#contact_name_id").val(cnval);
-      }
+      // if ($("#contact_name_id").length) {
+      //   $("#contact_name_id").val(cnval);
+      // }
     });
   });
-  $(document).on('change', '#edit_contact_company', function () {
+  $(document).on('change', '#select_client_id', function () {
     let ccval = $(this).val();
     $.get($(this).data('route'), {
-      company: $(this).find('option:selected').text(),
-      name_id: $("#edit_contact_name").val()
+      filter: 1,
+      client_id: ccval
     }, function (data) {
-      if ($("#contact_company_id").length) {
-        $("#contact_company_id").val(ccval);
-      }
-      $("input[name=name]").val(data.name);
-      $("input[name=company]").val(data.company);
-      $("input[name=email]").val(data.email);
-      $("input[name=mobile]").val(data.mobile);
-      $("input[name=telephone]").val(data.telephone);
-      $("input[name=address_line1]").val(data.address_line1);
-      $("input[name=address_line2]").val(data.address_line2);
-      $("input[name=county]").val(data.county);
-      $("input[name=postal_code]").val(data.postal_code);
+
+      $(document).find("#select_contact_id").html('<option value="" disabled>--Select Name--</option>');
+      $.each(data.clients.contacts, function (i, v) {
+        $(document).find("#select_contact_id").append('<option value="' + v.id + '">' + v.first_name + ' ' + v.last_name + '</option>');
+      });
+      // if ($("#contact_company_id").length) {
+      //   $("#contact_company_id").val(ccval);
+      // }
+      // $("input[name=name]").val(data.name);
+      // $("input[name=company]").val(data.company);
+      // $("input[name=email]").val(data.email);
+      // $("input[name=mobile]").val(data.mobile);
+      // $("input[name=telephone]").val(data.telephone);
+      // $("input[name=address_line1]").val(data.address_line1);
+      // $("input[name=address_line2]").val(data.address_line2);
+      // $("input[name=county]").val(data.county);
+      // $("input[name=postal_code]").val(data.postal_code);
     });
+  });
+  function callResetContactDetails(){
+    $.get("{{ route('enquiries.create')}}", {
+      filter: 1
+    }, function (data) {
+      
+      $(document).find("#select_client_id").html('<option value="">--Select Company--</option>');
+      $.each(data.clients, function (i, v) {
+        $(document).find("#select_client_id").append('<option value="' + v.id + '">' + v.client_name + '</option>');
+      });
+      
+      $(document).find("#select_contact_id").html('<option value="">--Select Name--</option>');
+      $.each(data.contacts, function (i, v) {
+        $(document).find("#select_contact_id").append('<option value="' + v.id + '">' + v.first_name + ' ' + v.last_name + '</option>');
+      });
+
+    });
+  }
+  $(document).on('click', '#contact_company_reset_btn', function () {
+    callResetContactDetails();
   });
   $(document).on('click', '#save_enquiry_btn', function () {
     $("#enquiry_create_form").submit();
@@ -169,6 +195,7 @@
             }
         },
         success: function (responseText, statusText, xhr, $form) {
+          callResetContactDetails();
             // location.href = "{{ route('clients-and-contacts.index') }}" + "/" + responseText.id;
         }
       });

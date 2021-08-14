@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 use App\Models\Media;
+use App\Models\GeneralEnquiryQuestion;
+use App\Models\JobSpecificEnquiryQuestion;
 
 class Job extends Model
 {
@@ -21,6 +23,10 @@ class Job extends Model
                             'is_active',
                         ];  
 
+    public function contact(){
+        return $this->belongsTo(Contact::class);
+    }
+
     public function medias(){
         return $this->morphMany(Media::class, 'entity');
     }
@@ -31,5 +37,13 @@ class Job extends Model
 
     public function images(){
         return $this->morphMany(Media::class, 'entity')->where('type' , 'image');
+    }
+
+    public function generalEnquiryQuestion(){
+        return $this->hasOne(GeneralEnquiryQuestion::class);
+    }
+    
+    public function jobSpecificEnquiryQuestion(){
+        return $this->hasOne(JobSpecificEnquiryQuestion::class);
     }
 }

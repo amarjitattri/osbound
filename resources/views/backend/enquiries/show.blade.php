@@ -15,7 +15,7 @@ $baseRoute= "enquiries";
               {{$job_data['job_no']}}
             </span>
             <span class="ot-right ot-enq_date">
-              15-08-2020
+              {{ \Carbon\Carbon::parse($job_data['created_at'])->format('d-m-Y') }}
             </span>
           </div>
         </div>
@@ -34,10 +34,10 @@ $baseRoute= "enquiries";
       </div>
     </div>
     <div class="card-block">
-      <form method="POST" action="https://dev.data-solve.co.uk/dev/ot/enquiries/28"
+      <form method="POST" action="{{ route('enquiries.update', ['enquiry' => $job_data['id']])}}"
         accept-charset="UTF-8" id="updateEnquiryForm" autocomplete="off"
-        enctype="multipart/form-data"><input name="_token" type="hidden"
-          value="ln4OkVDiMmCI1dtyNeckFUuUN8bpSiATwd4jwcWw">
+        enctype="multipart/form-data">
+        <input name="_token" type="hidden" value="{{csrf_token()}}">
         <input type="hidden" name="_method" value="put">
         <div class="row">
           <div class="col-md-4">
@@ -46,104 +46,72 @@ $baseRoute= "enquiries";
                 <fieldset>
                   <legend>Contact Details</legend>
                   <div class="form-group row">
-                    <label for="contact_id" class="col-md-4 col-form-label">Name</label>
+                    <label for="contact_name" class="col-md-4 col-form-label">Name</label>
                     <div class="col-8">
-                      <select class="custom-select custom-select-sm" id="edit_contact_name"
-                        data-route="https://dev.data-solve.co.uk/dev/ot/company-contact" required
-                        name="contact_id">
-                        <option value="">--SELECT--</option>
-                        <option value="8" selected="selected">Allan Donaldson</option>
-                        <option value="13">Darren O&#039;Brien</option>
-                        <option value="2">Jane Austin</option>
-                        <option value="3">Jason Smith</option>
-                        <option value="1">Joe Bloogs</option>
-                        <option value="14">Kylie Conrad</option>
-                        <option value="7">Michael</option>
-                        <option value="4">Test Name</option>
-                        <option value="12">test123vb</option>
-                        <option value="10">V B</option>
-                        <option value="5">VB</option>
-                        <option value="6">Vb1</option>
-                        <option value="9">VB2</option>
-                      </select>
+                      <input class="form-control form-control-sm" readonly name="contact_name" type="text"
+                        value="{{ @$job_data['contact']['first_name'] .' '. @$job_data['contact']['last_name'] }}" id="contact_name">
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label for="company_id" class="col-md-4 col-form-label">Company</label>
+                    <label for="client_name" class="col-md-4 col-form-label">Company</label>
                     <div class="col-8">
-                      <select class="custom-select custom-select-sm" id="edit_contact_company"
-                        data-route="https://dev.data-solve.co.uk/dev/ot/company-contact-by-name-contact"
-                        required name="company_id">
-                        <option value="">--SELECT--</option>
-                        <option value="2">Austin and Sons Limited</option>
-                        <option value="1">Becky Int</option>
-                        <option value="14">Conrad Wood Polishing</option>
-                        <option value="8" selected="selected">Donaldson Carpenters Limited</option>
-                        <option value="13">O&#039;Brien Furnitures</option>
-                        <option value="3">Smiths and Wardrobes Limited</option>
-                        <option value="7">Starlit</option>
-                        <option value="4">Test Comapny</option>
-                        <option value="6">Test Comp1</option>
-                        <option value="10">Test New</option>
-                        <option value="11">Test New 2</option>
-                        <option value="9">Test Vb Comp1</option>
-                        <option value="5">Vb Comp</option>
-                      </select>
+                      <input class="form-control form-control-sm" readonly name="client_name" type="text"
+                        value="{{ @$job_data->contact->client->client_name }}" id="client_name">
                     </div>
                   </div>
                   <div class="form-group row">
                     <label for="email" class="col-md-4 col-form-label">Email</label>
                     <div class="col-8">
                       <input class="form-control form-control-sm" readonly name="email" type="text"
-                        value="info@donaldsoncarpenters.co.uk" id="email">
+                        value="{{ @$job_data->contact->email }}" id="email">
                     </div>
                   </div>
                   <div class="form-group row">
                     <label for="mobile" class="col-md-4 col-form-label">Mobile</label>
                     <div class="col-8">
                       <input class="form-control form-control-sm" readonly name="mobile" type="text"
-                        value="07985 458 7854" id="mobile">
+                        value="{{ @$job_data->contact->mobile }}" id="mobile">
                     </div>
                   </div>
                   <div class="form-group row">
                     <label for="telephone" class="col-md-4 col-form-label">Telephone</label>
                     <div class="col-8">
                       <input class="form-control form-control-sm" readonly name="telephone"
-                        type="text" value="0207 895 4587" id="telephone">
+                        type="text" value="{{ @$job_data->contact->telephone }}" id="telephone">
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label for="address_line1" class="col-md-4 col-form-label">Address Line 1</label>
+                    <label for="address_line_1" class="col-md-4 col-form-label">Address Line 1</label>
                     <div class="col-8">
-                      <input class="form-control form-control-sm" readonly name="address_line1"
-                        type="text" value="23 Hudson Road" id="address_line1">
+                      <input class="form-control form-control-sm" readonly name="address_line_1"
+                        type="text" value="{{ @$job_data->contact->client->address_line_1 }}" id="address_line_1">
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label for="address_line2" class="col-md-4 col-form-label">Address Line 2</label>
+                    <label for="address_line_2" class="col-md-4 col-form-label">Address Line 2</label>
                     <div class="col-8">
-                      <input class="form-control form-control-sm" readonly name="address_line2"
-                        type="text" value="Hudson Corner" id="address_line2">
+                      <input class="form-control form-control-sm" readonly name="address_line_2"
+                        type="text" value="{{ @$job_data->contact->client->address_line_2 }}" id="address_line_2">
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label for="county" class="col-md-4 col-form-label">County</label>
+                    <label for="country" class="col-md-4 col-form-label">Country</label>
                     <div class="col-8">
-                      <input class="form-control form-control-sm" readonly name="county" type="text"
-                        value="London" id="county">
+                      <input class="form-control form-control-sm" readonly name="country" type="text"
+                        value="{{ @$job_data->contact->client->country }}" id="country">
                     </div>
                   </div>
                   <div class="form-group row">
                     <label for="postal_code" class="col-md-4 col-form-label">Postal Code</label>
                     <div class="col-8">
                       <input class="form-control form-control-sm" readonly name="postal_code"
-                        type="text" value="SW7 6HG" id="postal_code">
+                        type="text" value="{{ @$job_data->contact->client->postal_code }}" id="postal_code">
                     </div>
                   </div>
                 </fieldset>
               </div>
             </div>
-            <div class="form-row">
+            {{-- <div class="form-row">
               <div class="col-md-12">
                 <fieldset>
                   <legend>Administration</legend>
@@ -191,7 +159,7 @@ $baseRoute= "enquiries";
                   </div>
                 </fieldset>
               </div>
-            </div>
+            </div> --}}
           </div>
           <!-- Arul edit starts-->
           <div class="col-md-8">
@@ -247,318 +215,27 @@ $baseRoute= "enquiries";
                 aria-expanded="false">
                 <div class="row">
                     <div class="col-md-12">
-                      <fieldset>
-                        <legend>General Enquiry Questions</legend>
-                        <div class="row">
-                          <div class="col-md-4">
-                            <div class="form-group row">
-                              <label for="enquiry_for" class="col-md-4 col-form-label">Enquiry For</label>
-                              <div class="col-md-8">
-                                <select class="custom-select" id="enquiry_for" name="enquiry_for">
-                                  <option selected="selected" value="">Please Select</option>
-                                  <option value="Osbond &amp; Tutt">Osbond &amp; Tutt</option>
-                                  <option value="London Spray Finishes">London Spray Finishes</option>
-                                </select>
-                              </div>
-                            </div>
-                            <div class="form-group row">
-                              <label for="referral_from" class="col-md-4 col-form-label">How Did You hear about
-                                us</label>
-                              <div class="col-md-8">
-                                <select class="custom-select" id="referral_from" name="referral_from">
-                                  <option selected="selected" value="">Please Select</option>
-                                  <option value="Email">Email</option>
-                                  <option value="Google">Google</option>
-                                  <option value="Instagram">Instagram</option>
-                                  <option value="Facebook">Facebook</option>
-                                  <option value="Linkedin">Linkedin</option>
-                                </select>
-                              </div>
-                            </div>
-                            <div class="form-group row">
-                              <label for="transport_for" class="col-md-4 col-form-label">Transport For
-                                Collection Required</label>
-                              <div class="col-md-1">
-                                <div class="custom-control custom-checkbox" style="margin-top: 7px;">
-                                  <input class="custom-control-input" id="transport_for_required"
-                                    name="transport_for_required" type="checkbox" value="1">
-                                  <label class="custom-control-label"
-                                    for="transport_for_required">&nbsp;</label>
-                                </div>
-                              </div>
-                              <div class="col-md-7">
-                                <input class="form-control date_timepicker" readonly name="transport_for"
-                                  type="text" value="" id="transport_for">
-                              </div>
-                            </div>
-                            <div class="row text-center">
-                              <div class="col-md-6">
-                                <label for="express_quotation" class="control-label">Express Quotation</label>
-                                <div class="custom-control custom-checkbox">
-                                  <input class="custom-control-input" name="express_quotation" type="checkbox"
-                                    value="1" id="express_quotation">
-                                  <label class="custom-control-label" for="express_quotation">&nbsp;</label>
-                                </div>
-                              </div>
-                              <div class="col-md-6">
-                                <label for="quotation_required_by" class="control-label">Quotation Required
-                                  By</label>
-                                <input class="form-control date_timepicker" readonly
-                                  name="quotation_required_by" type="text" value="" id="quotation_required_by">
-                              </div>
-                            </div>
-                            <div class="row text-center">
-                              <div class="col-md-6">
-                                <label for="contract_start" class="control-label">Contract Start</label>
-                                <input class="form-control datepicker" name="contract_start" type="text"
-                                  value="" id="contract_start">
-                              </div>
-                              <div class="col-md-6">
-                                <label for="contract_finish" class="control-label">Contract Finish</label>
-                                <input class="form-control datepicker" name="contract_finish" type="text"
-                                  value="" id="contract_finish">
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-md-8">
-                            <div class="table-responsive">
-                              <table class="table table-borderless table-condensed">
-                                <thead>
-                                  <tr>
-                                    <th width="30%">Site Type</th>
-                                    <th width="50%">Site Address</th>
-                                    <th width="20">Postcode</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  <tr>
-                                    <td>
-                                      <select class="custom-select" name="site_type_1">
-                                        <option selected="selected" value="">Please Select</option>
-                                        <option value="4">Commercial building site</option>
-                                        <option value="3">Private home</option>
-                                        <option value="2">Private home building site</option>
-                                        <option value="5">Public space : Hotel, Restaurant, Museum</option>
-                                        <option value="7">vbcc</option>
-                                        <option value="6">Workshop/Commercial Premises</option>
-                                      </select>
-                                    </td>
-                                    <td>
-                                      <textarea class="form-control" rows="3" name="site_address_1"
-                                        cols="50"></textarea>
-                                    </td>
-                                    <td>
-                                      <input class="form-control" name="postcode_1" type="number">
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td>
-                                      <select class="custom-select" name="site_type_2">
-                                        <option selected="selected" value="">Please Select</option>
-                                        <option value="4">Commercial building site</option>
-                                        <option value="3">Private home</option>
-                                        <option value="2">Private home building site</option>
-                                        <option value="5">Public space : Hotel, Restaurant, Museum</option>
-                                        <option value="7">vbcc</option>
-                                        <option value="6">Workshop/Commercial Premises</option>
-                                      </select>
-                                    </td>
-                                    <td>
-                                      <textarea class="form-control" rows="3" name="site_address_2"
-                                        cols="50"></textarea>
-                                    </td>
-                                    <td>
-                                      <input class="form-control" name="postcode_2" type="number">
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td>
-                                      <select class="custom-select" name="site_type_3">
-                                        <option selected="selected" value="">Please Select</option>
-                                        <option value="4">Commercial building site</option>
-                                        <option value="3">Private home</option>
-                                        <option value="2">Private home building site</option>
-                                        <option value="5">Public space : Hotel, Restaurant, Museum</option>
-                                        <option value="7">vbcc</option>
-                                        <option value="6">Workshop/Commercial Premises</option>
-                                      </select>
-                                    </td>
-                                    <td>
-                                      <textarea class="form-control" rows="3" name="site_address_3"
-                                        cols="50"></textarea>
-                                    </td>
-                                    <td>
-                                      <input class="form-control" name="postcode_3" type="number">
-                                    </td>
-                                  </tr>
-                                </tbody>
-                              </table>
-                            </div>
-                          </div>
-                        </div>
-                      </fieldset>
+                        @includeIf('backend.enquiries.inner.general_enquiry_questions')
                     </div>
-                  </div>
+                </div>
               </div>
               <div class="tab-pane" id="jobspecificenquiryquestions" role="tabpanel"
                 aria-expanded="false">
                 <div class="row">
           
-                    <div class="col-md-8">
-                      <style>
-                        table.padding_zero td {
-                          padding: 2px 5px 2px 5px !important;
-                        }
-          
-                        textarea {
-                          resize: none;
-                        }
-                      </style>
-                      <fieldset>
-                        <legend>Job Specific Enquiry Questions</legend>
-                        <div class="table-responsive">
-                          <table class="table table-condensed table-borderless padding_zero">
-                            <tr>
-                              <td colspan="2">Is Item Fixed or Portable</td>
-                            </tr>
-                            <tr>
-                              <td width="40%">
-                                <select class="custom-select" name="job_specific_key_1">
-                                  <option selected="selected" value="">Please Select</option>
-                                  <option value="Fixed">Fixed</option>
-                                  <option value="Portable">Portable</option>
-                                  <option value="Both">Both</option>
-                                </select>
-                              </td>
-                              <td width="60%">
-                                <textarea class="form-control" rows="3" name="job_specific_val_1"
-                                  cols="50"></textarea>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td colspan="2">Condition of Substrate</td>
-                            </tr>
-                            <tr>
-                              <td width="40%">
-                                <select class="custom-select" name="job_specific_key_2">
-                                  <option selected="selected" value="">Please Select</option>
-                                  <option value="New">New</option>
-                                  <option value="Existing">Existing</option>
-                                  <option value="Both">Both</option>
-                                </select>
-                              </td>
-                              <td width="60%">
-                                <textarea class="form-control" rows="3" name="job_specific_val_2"
-                                  cols="50"></textarea>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td colspan="2">Is Substrate going to be in a High Contact area or Low Contact
-                                area</td>
-                            </tr>
-                            <tr>
-                              <td width="40%">
-                                <select class="custom-select" name="job_specific_key_3">
-                                  <option selected="selected" value="">Please Select</option>
-                                  <option value="High Contact Area">High Contact Area</option>
-                                  <option value="Low Contact Area">Low Contact Area</option>
-                                </select>
-                              </td>
-                              <td width="60%">
-                                <textarea class="form-control" rows="3" name="job_specific_val_3"
-                                  cols="50"></textarea>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td colspan="2">Do you want the contours of the substrate to be exposed? <br>
-                                <small>(With natural timber this
-                                  could be the grain of the timber or the roughness of a textured piece of
-                                  architectural metal)</small></td>
-                            </tr>
-                            <tr>
-                              <td width="40%">
-                                <select class="custom-select" name="job_specific_key_4">
-                                  <option selected="selected" value="">Please Select</option>
-                                  <option value="Yes">Yes</option>
-                                  <option value="No">No</option>
-                                </select>
-                              </td>
-                              <td width="60%">
-                                <textarea class="form-control" rows="3" name="job_specific_val_4"
-                                  cols="50"></textarea>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td colspan="2">Do you have a specific colour or effect in mind that you want to
-                                match or a colour card from<br>
-                                a
-                                paint supplier or do you want to visit our show room to pick from a variety of
-                                different effects
-                              </td>
-                            </tr>
-                            <tr>
-                              <td width="40%">
-                                <select class="custom-select" name="job_specific_key_5">
-                                  <option selected="selected" value="">Please Select</option>
-                                  <option value="Specific Colour or Effect">Specific Colour or Effect</option>
-                                  <option value="Colour Card from Paint Supplier">Colour Card from Paint
-                                    Supplier</option>
-                                  <option value="Supply Own Materials or Paint">Supply Own Materials or Paint
-                                  </option>
-                                  <option value="Visit Showroom">Visit Showroom</option>
-                                </select>
-                              </td>
-                              <td width="60%">
-                                <textarea class="form-control" rows="3" name="job_specific_val_5"
-                                  cols="50"></textarea>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td colspan="2"><span>Do you have a sheen level in mind</span></td>
-                            </tr>
-                            <tr>
-                              <td width="40%">
-                                <select class="custom-select" name="job_specific_key_6">
-                                  <option selected="selected" value="">Please Select</option>
-                                  <option value="Yes">Yes</option>
-                                  <option value="No">No</option>
-                                </select>
-                              </td>
-                              <td width="60%">
-                                <textarea class="form-control" rows="3" name="job_specific_val_6"
-                                  cols="50"></textarea>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td colspan="2"><span>Do you require removal and fitting of the items</span></td>
-                            </tr>
-                            <tr>
-                              <td width="40%">
-                                <select class="custom-select" name="job_specific_key_7">
-                                  <option selected="selected" value="">Please Select</option>
-                                  <option value="Yes">Yes</option>
-                                  <option value="No">No</option>
-                                </select>
-                              </td>
-                              <td width="60%">
-                                <textarea class="form-control" rows="3" name="job_specific_val_7"
-                                  cols="50"></textarea>
-                              </td>
-                            </tr>
-                          </table>
-                        </div>
-                      </fieldset>
+                    <div class="col-md-12">      
+                      @includeIf('backend.enquiries.inner.job_specific_questions')
                     </div>
                   </div>
               </div>
               <div class="tab-pane" id="enquirydetails" role="tabpanel" aria-expanded="false">
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-12">
                     <fieldset>
                         <legend>Enquiry Details</legend>
                         <div class="form-group scroll" style="height: 769px;overflow-y: auto;">
                         <textarea class="form-control" id="description" required name="description" cols="50"
-                            rows="10"></textarea>
+                            rows="10">{{old('description') ?? @$job_data['description']}}</textarea>
                         </div>
                     </fieldset>
                     </div>
@@ -683,9 +360,23 @@ $baseRoute= "enquiries";
     }
   }
   </style>
+  <style>
+    table.padding_zero td {
+      padding: 2px 5px 2px 5px !important;
+    }
+
+    textarea {
+      resize: none;
+    }
+  </style>
 @endsection
 @section('customjs')
   @parent
+  <script>
+    CKEDITOR.replace('description',{
+      height:'699px'
+    });
+  </script>
   <script>
     $(document).on('change', '.onChangeUpdateStatusReason', function () {
       let route = $(this).data('route'), object_id = $(this).val(), type = $(this).data('type'),
