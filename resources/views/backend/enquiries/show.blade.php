@@ -242,9 +242,11 @@ $baseRoute= "enquiries";
                 </div>
               </div>
               <div class="tab-pane" id="tasks" role="tabpanel" aria-expanded="false">
-                <p class="m-0">5.Cras consequat in enim ut efficitur. Nulla posuere elit quis auctor
-                  interdum praesent sit amet nulla vel enim amet. Donec convallis tellus neque, et
-                  imperdiet felis amet.</p>
+                <div class="row">
+                    <div class="col-md-12">
+                        @includeIf('backend.enquiries.inner.tasks')
+                    </div>
+                </div>
               </div>
               <div class="tab-pane" id="jobtags" role="tabpanel" aria-expanded="false">
                 <p class="m-0">6.In enim ut efficitur. Nulla posuere elit quis auctor interdum
@@ -266,99 +268,229 @@ $baseRoute= "enquiries";
 
 @section('header')
 <style>
-.apj-tab-s{
-    border: 2px groove #ddd !important;
-  }
-  .apj-nav-tabs .nav-item .nav-link{
-    position: relative;
-    display: block;
-    border: unset;
-    color: #ffffff;
-    /* overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap; */
-    line-height: 2;
-  }
-  .audioPlayList{
-    height: 223px;
-  }
-  .audio_files_upload {
-    width: calc(100% - 111px);
-  }
-  #audioPlayerContainer .audio_preview_img{
-    min-height: 300px;
-    max-height: 300px;
-  }
-  .apj-nav-tabs .nav-item .nav-link::after{
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: -1;
-    outline: 1px solid transparent;
-    border-radius: 0px 2px 0 0;
-    border: 2px solid #898989;
-    background: #fa5661;
-    box-shadow: inset 0 -3px 3px rgb(0 0 0 / 5%);
-    content: '';
-    -webkit-transform: perspective(9px) rotateX(2.50deg) translateZ(-0.6px);
+    .apj-tab-s {
+  border: 2px groove #ddd !important;
+}
+
+.apj-nav-tabs .nav-item .nav-link {
+  position: relative;
+  display: block;
+  border: unset;
+  color: #ffffff;
+  /* overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; */
+  line-height: 2;
+}
+
+.audioPlayList {
+  height: 223px;
+}
+
+.audio_files_upload {
+  width: calc(100% - 111px);
+}
+
+#audioPlayerContainer .audio_preview_img {
+  min-height: 300px;
+  max-height: 300px;
+}
+
+.apj-nav-tabs .nav-item .nav-link::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  outline: 1px solid transparent;
+  border-radius: 0px 2px 0 0;
+  border: 2px solid #898989;
+  background: #fa5661;
+  box-shadow: inset 0 -3px 3px rgb(0 0 0 / 5%);
+  content: '';
+  -webkit-transform: perspective(9px) rotateX(2.50deg) translateZ(-0.6px);
   transform: perspective(9px) rotateX(2.50deg) translateZ(-0.6px);
-    -webkit-transform-origin: 0 0;
-    transform-origin: 0 0;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-  }
-  .apj-nav-tabs .nav-item .nav-jobtags::after{
-    -webkit-transform: perspective(5px) rotateX(2.5deg) translateZ(-1px);
+  -webkit-transform-origin: 0 0;
+  transform-origin: 0 0;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.apj-nav-tabs .nav-item .nav-jobtags::after {
+  -webkit-transform: perspective(5px) rotateX(2.5deg) translateZ(-1px);
   transform: perspective(5px) rotateX(2.5deg) translateZ(-1px);
-  }
-  .apj-nav-tabs .nav-item .nav-link:hover{
+}
+
+.apj-nav-tabs .nav-item .nav-link:hover {
   color: #ffffff;
   border-color: transparent;
-  }
-  .apj-nav-tabs .nav-item .nav-link.active:hover{
+}
+
+.apj-nav-tabs .nav-item .nav-link.active:hover {
   color: #ffffff;
-  }
-  
-  .apj-nav-tabs.nav-tabs .nav-item {
-    margin-bottom: -5px;
-        position: relative;
-        z-index: 1;
-        display: block;
-        margin: 0;
-        text-align: center;
+}
+
+.apj-nav-tabs.nav-tabs .nav-item {
+  margin-bottom: -5px;
+  position: relative;
+  z-index: 1;
+  display: block;
+  margin: 0;
+  text-align: center;
   /*       -webkit-flex: 1;
-        -moz-flex: 1;
-        -ms-flex: 1;
-        flex: 1; */
-  
-  }
-  
-  .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
-    color: #ffffff;
-    background-color: transparent;
-    border-color: transparent;
-  }
-  .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active::after{
-    background-color: #fd3f4c;
-  }
-  
+      -moz-flex: 1;
+      -ms-flex: 1;
+      flex: 1; */
+}
+
+.nav-tabs .nav-item.show .nav-link,
+.nav-tabs .nav-link.active {
+  color: #ffffff;
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.nav-tabs .nav-item.show .nav-link,
+.nav-tabs .nav-link.active::after {
+  background-color: #fd3f4c;
+}
+
+.apj-nav-tabs .nav-link {
+  padding: .1rem 1.7rem .1rem .5rem;
+}
+
+#tasks table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#tasks tr {
+  vertical-align: top;
+}
+
+#tasks td {
+  text-align: left;
+  padding: 8px;
+}
+
+#tasks th {
+  text-align: center;
+  padding: 8px;
+}
+
+#tasks .taskaction_th,
+#tasks .status_th,
+#tasks .dateadded_th,
+#tasks .duedate_th {
+  width: 20%;
+}
+
+#tasks .taskaction_textarea {
+  width: 100%;
+  border: 1px solid #ced4da;
+}
+
+#tasks .input-group-addon {
+  background-color: #ffffff;
+  color: #000;
+  padding: 0px 6px;
+  font-size: 22px;
+}
+
+.apj_divider {
+  border-bottom: 1px solid rgba(204, 204, 204, .35);
+  margin: 20px 8px 8px 8px;
+}
+
+.tasks_db_table {
+  margin-top: 16px;
+  height: 534px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: block;
+}
+
+#jobtags .ms-list li {
+  width: 100%;
+  padding: 6px 10px;
+}
+
+#jobtags .ms-list {
+  border: 2px groove #ddd;
+  height: 430px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+#jobtags .ms-list li {
+  cursor: pointer;
+}
+
+#jobtags .ms-list li:hover {
+  background: #fa5661;
+  color: #ffffff;
+}
+
+#jobtags .ms-list li a {
+  display: block;
+  width: 100%;
+}
+
+#jobtags .ms-list li.selected,
+#jobtags .ms-list li.selected a {
+  background: #fa5661;
+  color: #ffffff;
+}
+
+#jobtags .ms-list li:hover a,
+#jobtags .ms-list li a:focus {
+  color: #ffffff;
+}
+
+#jobtags .ms-list li:not(:last-child) {
+  border-bottom: 1px solid #898989;
+}
+
+#jobtags .addselectedtext {
+  background: unset;
+  border: 0;
+  outline: 0;
+}
+
+#jobtags .addselectedtext:focus {
+  outline: 0;
+}
+
+#jobtags .addselectedtext i {
+  display: block;
+  font-size: 70px;
+}
+
+#jobtags .addselectedtext img {
+  width: 65%;
+}
+
+#jobtags .list-form-group {
+  margin-bottom: 0;
+}
+
+#jobtags .mt-20 {
+  margin-top: 1.25em;
+}
+
+@media only screen and (min-width: 1465px) and (max-width: 1600px) {
   .apj-nav-tabs .nav-link {
-    padding: .1rem 1.7rem .1rem .5rem;
+    padding: .1rem 0.7rem .1rem .5rem;
   }
-  
-  
-  @media only screen and (min-width: 1465px) and (max-width: 1600px) {
-    .apj-nav-tabs .nav-link {
-      padding: .1rem 0.7rem .1rem .5rem;
+}
+
+@media only screen and (min-width: 991px) and (max-width: 1608px) {
+  .apj-nav-tabs.nav-tabs .nav-item {
+    margin-top: 3px;
   }
-  }
-  @media only screen and (min-width: 991px) and (max-width: 1608px) {
-    .apj-nav-tabs.nav-tabs .nav-item {
-  margin-top: 3px;
-    }
-  }
+}
   </style>
   <style>
     table.padding_zero td {
