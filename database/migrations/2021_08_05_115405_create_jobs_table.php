@@ -21,9 +21,14 @@ class CreateJobsTable extends Migration
             $table->string('date')->nullable();
             $table->text('description')->nullable();
             
+            
             $table->string('job_type')->nullable();
             $table->string('job_type_slug')->nullable();
             // $table->bigInteger('client_id')->unsigned();
+            
+            $table->integer('reason')->nullable();
+            $table->integer('status')->nullable();
+
             $table->boolean('is_active')->default('1');
 
             $table->timestamps();

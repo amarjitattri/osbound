@@ -4,113 +4,6 @@
 $pageName= "Enquiries";
 $baseRoute= "enquiries";
 
-// $tableData = collect([
-//   [
-//     'enq_number' => '123',
-//     'enq_date' => '03/03/2121',
-//     'contact_name' => 'Contact',
-//     'company_name' => 'company_name',
-//     'email' => 'Email',
-//     'mobile' => '21312312',
-//     'telephone' => '1231232',
-//     'reminder_date' => '09/21/12',
-//     'snooze' => '123122',
-//     'description' => 'asfdasdfasdfdfadas',
-//     'reason' => 'asdfafdsafsdfasf',
-//     'status'=> 1,
-//     'id' => 1
-// ],
-//   [
-//     'enq_number' => '123',
-//     'enq_date' => '03/03/2121',
-//     'contact_name' => 'Contact',
-//     'company_name' => 'company_name',
-//     'email' => 'Email',
-//     'mobile' => '21312312',
-//     'telephone' => '1231232',
-//     'reminder_date' => '09/21/12',
-//     'snooze' => '123122',
-//     'description' => 'asfdasdfasdfdfadas',
-//     'reason' => 'asdfafdsafsdfasf',
-//     'status'=> 1,
-//     'id' => 1
-// ],
-//   [
-//     'enq_number' => '123',
-//     'enq_date' => '03/03/2121',
-//     'contact_name' => 'Contact',
-//     'company_name' => 'company_name',
-//     'email' => 'Email',
-//     'mobile' => '21312312',
-//     'telephone' => '1231232',
-//     'reminder_date' => '09/21/12',
-//     'snooze' => '123122',
-//     'description' => 'asfdasdfasdfdfadas',
-//     'reason' => 'asdfafdsafsdfasf',
-//     'status'=> 1,
-//     'id' => 1
-// ],
-//   [
-//     'enq_number' => '123',
-//     'enq_date' => '03/03/2121',
-//     'contact_name' => 'Contact',
-//     'company_name' => 'company_name',
-//     'email' => 'Email',
-//     'mobile' => '21312312',
-//     'telephone' => '1231232',
-//     'reminder_date' => '09/21/12',
-//     'snooze' => '123122',
-//     'description' => 'asfdasdfasdfdfadas',
-//     'reason' => 'asdfafdsafsdfasf',
-//     'status'=> 1,
-//     'id' => 1
-// ],
-//   [
-//     'enq_number' => '123',
-//     'enq_date' => '03/03/2121',
-//     'contact_name' => 'Contact',
-//     'company_name' => 'company_name',
-//     'email' => 'Email',
-//     'mobile' => '21312312',
-//     'telephone' => '1231232',
-//     'reminder_date' => '09/21/12',
-//     'snooze' => '123122',
-//     'description' => 'asfdasdfasdfdfadas',
-//     'reason' => 'asdfafdsafsdfasf',
-//     'status'=> 1,
-//     'id' => 1
-// ],
-//   [
-//     'enq_number' => '123',
-//     'enq_date' => '03/03/2121',
-//     'contact_name' => 'Contact',
-//     'company_name' => 'company_name',
-//     'email' => 'Email',
-//     'mobile' => '21312312',
-//     'telephone' => '1231232',
-//     'reminder_date' => '09/21/12',
-//     'snooze' => '123122',
-//     'description' => 'asfdasdfasdfdfadas',
-//     'reason' => 'asdfafdsafsdfasf',
-//     'status'=> 1,
-//     'id' => 1
-// ],
-//   [
-//     'enq_number' => '123',
-//     'enq_date' => '03/03/2121',
-//     'contact_name' => 'Contact',
-//     'company_name' => 'company_name',
-//     'email' => 'Email',
-//     'mobile' => '21312312',
-//     'telephone' => '1231232',
-//     'reminder_date' => '09/21/12',
-//     'snooze' => '123122',
-//     'description' => 'asfdasdfasdfdfadas',
-//     'reason' => 'asdfafdsafsdfasf',
-//     'status'=> 1,
-//     'id' => 1
-// ],
-// ]);
 @endphp
 @section('content')
   <div class="card enquiry-card">
@@ -120,65 +13,8 @@ $baseRoute= "enquiries";
     <div class="card-block">
       <div class="row enquires">
         <div class="col-md-9 enquiry-left scroll">
-          <div class="row no-gutters" id="tableData">
-            @if($tableData->count())
-              @foreach ($tableData as $val)
-                <div class="col-md-6">
-                  <div class="card">
-                    <div class="card-header b-b-default">
-                      <h5>{{$val['job_no']}}</h5>
-                      <div class="card-header-right">
-                        {{$val['enq_date']}}
-                      </div>
-                    </div>
-                    <div class="card-block">
-                      <div class="row no-gutters">
-                        <div class="col-md-4">
-                          <span class="ot-name text-left">{{$val['first_name'] . $val['last_name']}}</span>
-                        </div>
-                        <div class="col-md-4">
-                          <span class="ot-company">{{$val['client_name']}}</span>
-                        </div>
-                        <div class="col-md-4 text-right">
-                          <span class="ot-email">{{$val['email']}}</span>
-                        </div>
-                      </div>
-                      <div class="row no-gutters">
-                        <div class="col-md-4">
-                          <span class="ot-mobile">{{$val['mobile']}}</span>
-                        </div>
-                        <div class="col-md-4">
-                          <span class="ot-telephone">{{$val['telephone']}}</span>
-                        </div>
-                        {{-- <div class="col-md-2 text-center">
-                          <span class="ot-reminder">{{$val['reminder_date']}}</span>
-                        </div>
-                        <div class="col-md-2 text-center">
-                          {{$val['snooze']}} {{ \Str::plural('Day',$val['snooze']) }}
-                        </div> --}}
-                      </div>
-                      <div class="row no-gutters px-1 border">
-                        <div class="col-md-12 description scroll">
-                          {!! $val['description'] !!}
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row m-0 px-0 b-t-default">
-                      <div class="col-4 f-btn b-r-default py-2">
-                        {{-- {!! Form::select('status', $status , $val['status'] , ['class' => 'custom-select custom-select-sm onChangeUpdateStatusReason','placeholder'=>'Status','id'=>'status_'.$val['id'],'data-id'=>$val['id'],'data-type'=>'status','data-route'=>route('enquiries.update.status',$val['id'])]) !!} --}}
-                      </div>
-                      <div class="col-4 f-btn b-r-default py-2">
-                        {{-- {!! Form::select('reason', $reasons , $val['reason'] , ['class' => 'custom-select custom-select-sm onChangeUpdateStatusReason','placeholder'=>'Reason','id'=>'reason_'.$val['id'],'data-id'=>$val['id'],'data-type'=>'reason','data-route'=>route('enquiries.update.reason',$val['id'])]) !!} --}}
-                      </div>
-                      <div class="col-4 f-btn py-2">
-                        <a href="{{route('enquiries.show',$val['id'])}}"
-                           class="btn btn-sm btn-block btn-primary">View Details</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              @endforeach
-            @endif
+          <div>
+            @includeIf('backend.enquiries.inner.listing_cards')
           </div>
           <div class="row">
             <div class="col-md-12">
@@ -294,6 +130,54 @@ $baseRoute= "enquiries";
 @endsection --}}
 @section('customjs')
   @parent
+  <script>
+
+    $(document).on('click', '#search_enquiry', function (e) {
+      e.preventDefault();
+
+      $("#enquiry_filter_form").ajaxSubmit({
+        resetForm: true,
+        url: "{{ route('enquiries.index', [ 'filter' => '1'])}}",
+        error: function (res) {
+            let errorBucket = res.responseJSON.errors ?? [];
+            if(errorBucket){
+                Object.keys(errorBucket).forEach(function(val, index) {
+                    var $label = $("<label>").attr('id', val+'-servererror').attr('class','error').attr('for',val).text(errorBucket[val][0]);
+                    var $inputField = $("input[name="+val+"]");
+                    $label.insertAfter($inputField);
+                });
+            }
+        },
+        success: function (responseText, statusText, xhr, $form) {
+          console.log('form sunmitted');
+            // location.href = "{{ route('enquiries.index') }}" + "/" + responseText.id;
+        }
+      });
+    });
+    $("#company_contacts_form").validate({
+      submitHandler: function (form) {
+        $(form).ajaxSubmit({
+          resetForm: true,
+          error: function (res) {
+              let errorBucket = res.responseJSON.errors ?? [];
+              if(errorBucket){
+                  Object.keys(errorBucket).forEach(function(val, index) {
+                      var $label = $("<label>").attr('id', val+'-servererror').attr('class','error').attr('for',val).text(errorBucket[val][0]);
+                      var $inputField = $("input[name="+val+"]");
+                      $label.insertAfter($inputField);
+                  });
+              }
+          },
+          success: function (responseText, statusText, xhr, $form) {
+              location.href = "{{ route('enquiries.index') }}" + "/" + responseText.id;
+          }
+        });
+        return false;
+      }
+    });
+    $("#enquiry_create_form").validate();
+  </script>
+
   <script>
     $(document).on('change', '.onChangeUpdateStatusReason', function () {
       let route = $(this).data('route'), object_id = $(this).val(), type = $(this).data('type'),

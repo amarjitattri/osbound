@@ -1,6 +1,6 @@
 <fieldset>
   <legend>Searches</legend>
-  <form autocomplete="off">
+  <form autocomplete="off" id="enquiry_filter_form" >
     <div class="row no-gutters mb-2">
       <div class="col-md-2 pr-1">
         <select name="job_no" id="job_no" class="custom-select custom-select-sm">
@@ -25,7 +25,8 @@
         {{-- {!! Form::select('contact_name', @$contacts , request('contact') , ['class' => 'custom-select custom-select-sm','placeholder'=>'Name']) !!} --}}
       </div>
       <div class="col-md-2 pr-1">
-        {{-- {!! Form::select('status', @$statues , request('status') , ['class' => 'custom-select custom-select-sm','placeholder'=>'Status']) !!} --}}
+        {{-- @dd($filters_data['status']) --}}
+        {!! Form::select('status', @$filters_data['status'] , request('status') , ['class' => 'custom-select custom-select-sm','placeholder'=>'Status']) !!}
       </div>
       <div class="col-md-2 pr-1">
 
@@ -56,13 +57,13 @@
         {{-- {!! Form::select('company', @$filteredCompanies , request('company') , ['class' => 'custom-select custom-select-sm','placeholder'=>'Company']) !!} --}}
       </div>
       <div class="col-md-2 pr-1">
-        {{-- {!! Form::select('reason', $reasons , request('reason') , ['class' => 'custom-select custom-select-sm','placeholder'=>'Reason']) !!} --}}
+        {!! Form::select('reason', @$filters_data['reasons'] , request('reason') , ['class' => 'custom-select custom-select-sm','placeholder'=>'Reason']) !!}
       </div>
       <div class="col-md-2 pr-1">
 
       </div>
       <div class="col-md-1 pr-1">
-        <button type="submit" class="btn btn-sm btn-block btn-outline-primary">Search</button>
+        <button class="btn btn-sm btn-block btn-outline-primary" id="search_enquiry">Search</button>
       </div>
       <div class="col-md-1">
         <a href="{{ route($baseRoute.'.index') }}" class="btn btn-sm btn-block btn-outline-secondary active">Back To
