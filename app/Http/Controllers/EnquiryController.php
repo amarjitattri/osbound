@@ -114,11 +114,13 @@ class EnquiryController extends Controller
      */
     public function show($id)
     {
-        $job_data = Job::with(['generalEnquiryQuestion', 'jobSpecificEnquiryQuestion' , 'contact'])->where('id',$id)->where('is_active' , 1)->where('job_type_slug' , 'enquiries')->first();
+        $job_data = Job::with(['generalEnquiryQuestion', 'jobSpecificEnquiryQuestion' , 'contact' , 'jobTasks'])->where('id',$id)->where('is_active' , 1)->where('job_type_slug' , 'enquiries')->first();
 
         $general_enquiry_questions = \Config::get('constants.forms.enquiries.general_enquiry_questions');
         
         $job_specific_enquiry_questions = \Config::get('constants.forms.enquiries.job_specific_enquiry_questions');
+
+        // $job_tasks = JobTask::where('job_id', $id)
 
         return view('backend.enquiries.show', [
                                                 'job_data' => $job_data ,

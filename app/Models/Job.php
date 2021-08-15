@@ -27,6 +27,10 @@ class Job extends Model
         return $this->belongsTo(Contact::class);
     }
 
+    public function jobTasks(){
+        return $this->hasMany(JobTask::class);
+    }
+
     public function medias(){
         return $this->morphMany(Media::class, 'entity');
     }
