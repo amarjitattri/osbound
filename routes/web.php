@@ -23,9 +23,6 @@ Route::group(['middleware' => 'auth:web'], function () {
     
     Route::get('/dashboard', [LoginController::class, 'dashboard']);
 	
-    Route::get('enquiries/test-dropdown', function(){
-        return view('backend.enquiries.test-dropdown');
-    });
     Route::resource('enquiries', EnquiryController::class);
     
     Route::resource('jobtasks', JobTaskController::class);
