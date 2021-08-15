@@ -2,6 +2,7 @@
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\EnquiryController;
 use App\Http\Controllers\JobTaskController;
+use App\Http\Controllers\JobTagController;
 use App\Http\Controllers\MediaController;
 use App\Http\Controllers\ClientsAndContactsController;
 use Illuminate\Support\Facades\Route;
@@ -22,9 +23,15 @@ Route::group(['middleware' => 'auth:web'], function () {
     
     Route::get('/dashboard', [LoginController::class, 'dashboard']);
 	
+    Route::get('enquiries/test-dropdown', function(){
+        return view('backend.enquiries.test-dropdown');
+    });
     Route::resource('enquiries', EnquiryController::class);
     
     Route::resource('jobtasks', JobTaskController::class);
+    
+    Route::delete('jobtags/destroyMultiple', [JobTagController::class, 'destroyMultiple'])->name('jobtags.destroyMultiple');
+    Route::resource('jobtags', JobTagController::class);
 
     Route::delete('medias/destroyMultiple', [MediaController::class,'destroyMultiple'])->name('medias.destroyMultiple');
     Route::resource('medias', MediaController::class);

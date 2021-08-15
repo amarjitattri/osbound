@@ -30,6 +30,10 @@ class Job extends Model
     public function jobTasks(){
         return $this->hasMany(JobTask::class);
     }
+   
+    public function jobTags(){
+        return $this->belongsToMany(JobTag::class,'jobs_job_tags');
+    }
 
     public function medias(){
         return $this->morphMany(Media::class, 'entity');

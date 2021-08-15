@@ -249,8 +249,11 @@ $baseRoute= "enquiries";
                 </div>
               </div>
               <div class="tab-pane" id="jobtags" role="tabpanel" aria-expanded="false">
-                <p class="m-0">6.In enim ut efficitur. Nulla posuere elit quis auctor interdum
-                  praesent sit amet nulla vel enim amet. Donec convallis tellus neque</p>
+                <div class="row">
+                    <div class="col-md-12">
+                        @includeIf('backend.enquiries.inner.job_tags')
+                    </div>
+                </div>
               </div>
             </div>
           </div>
