@@ -25,7 +25,7 @@
     <div class="col-md-2"></div>
   </div> --}}
   <div class="row align-items-center">
-    <div class="col-md-4" style="min-height: 400px;">
+    <div class="col-md-4" style="min-height: 450px;">
       <div class="form-group list-form-group">
         <label for="jobspecifictagslist">Tag List for this Job</label>
         <select id="jobspecifictagslist" name="jobtags[]" multiple class="form-control"> 
@@ -62,7 +62,7 @@
     <div class="col-md-2">
       <button type="button" class="text-center addselectedtext" id="add_selected_tags"><b>Add Selected Tag</b> <img src="{{ asset('images/hand-left-icon.png')}}" alt="icon"> </button>
     </div>
-    <div class="col-md-4 align-self-start" id="all_job_tags_section">  
+    <div class="col-md-4 align-self-start" id="all_job_tags_section" style="min-height: 450px;">  
         <div class="form-group list-form-group">
             <div method="post" id="all_tags_form"> 
                 <div class="form-group"> 
@@ -106,7 +106,7 @@
       <button type="button" class="btn btn-sm btn-danger btn-block" id="delete_selected_tags"> Delete Selected Tags From Entire List</button>
     </div>
   </div>
-  <div class="row mt-20" id="update_tag_form">
+  <div class="row mt-5" id="update_tag_form">
     <div class="col-md-2"></div>
     <div class="col-md-2"><button type="button" class="btn btn-sm btn-danger btn-block" id="remove_job_specific_tags"> Remove Tags</button></div>
     <div class="col-md-2"></div>
@@ -128,7 +128,12 @@
 @parent
   {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />  --}}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css" /> 
-
+<style type="text/css">
+    .checkbox-list{
+        border: 1px solid #000;
+        height: 100%;
+    }
+</style>
 @endsection
 @section('customjs')
 @parent
@@ -179,6 +184,13 @@
             nonSelectedText: 'Select Tag', 
             enableFiltering: true, 
             enableCaseInsensitiveFiltering: true, 
+            buttonContainer: '<div class="jobspecificlist"></div>',
+            buttonClass: '',
+            templates: {
+                button: '',
+                ul: '<ul class="multiselect-container checkbox-list"></ul>',
+                option: '<a class="multiselect-option text-dark text-decoration-none"></a>'
+            }
         
         }); 
     });
@@ -234,7 +246,13 @@
             nonSelectedText: 'Select Tag', 
             enableFiltering: true, 
             enableCaseInsensitiveFiltering: true, 
-            buttonWidth:'400px',
+            buttonContainer: '<div class="jobspecificlist"></div>',
+            buttonClass: '',
+            templates: {
+                button: '',
+                ul: '<ul class="multiselect-container checkbox-list"></ul>',
+                option: '<a class="multiselect-option text-dark text-decoration-none"></a>'
+            }
         
         }); 
     
