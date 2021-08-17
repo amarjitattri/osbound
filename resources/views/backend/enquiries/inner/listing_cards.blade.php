@@ -1,6 +1,5 @@
 <div class="row no-gutters" id="listing_cards">
-    @if($tableData->count())
-      @foreach ($tableData as $val)
+      @forelse ($enquiries as $val)
         <div class="col-md-6">
           <div class="card">
             <div class="card-header b-b-default">
@@ -43,10 +42,21 @@
             </div>
             <div class="row m-0 px-0 b-t-default">
               <div class="col-4 f-btn b-r-default py-2">
-                {!! Form::select('status', @$filters_data['status'] , @$val['status'] , ['class' => 'custom-select custom-select-sm onChangeUpdateStatusReason','placeholder'=>'Status','id'=>'status_'.$val['id'],'data-id'=>$val['id'],'data-type'=>'status','data-route'=>route('enquiries.update',$val['id'])]) !!}
+                <select class="custom-select custom-select-sm onChangeUpdateStatusReason" name="status" id="{{'status_'.$val['id']}}" data-id="{{$val['id']}}" data-type="status" data-route="{{route('enquiries.update',$val['id'])}}">
+                    <option value="" @if(@$val['status']) disabled @endif>Status</option>
+                    @foreach ($filters_data['status'] as $id => $value)
+                        <option {{ @$val['status'] == $id ? 'selected' : '' }} value="{{$id}}">{{$value}}</option>
+                    @endforeach
+                </select>
               </div>
               <div class="col-4 f-btn b-r-default py-2">
-                {!! Form::select('reason', @$filters_data['reasons'] , @$val['reason'] , ['class' => 'custom-select custom-select-sm onChangeUpdateStatusReason','placeholder'=>'Reason','id'=>'reason_'.$val['id'],'data-id'=>$val['id'],'data-type'=>'reason','data-route'=>route('enquiries.update',$val['id'])]) !!}
+                <select class="custom-select custom-select-sm onChangeUpdateStatusReason" name="reason" id="{{'reason_'.$val['id']}}" data-id="{{$val['id']}}" data-type="reason" data-route="{{route('enquiries.update',$val['id'])}}">
+                    <option value="" @if(@$val['reason']) disabled @endif>Reason</option>
+                    @foreach ($filters_data['reasons'] as $id => $value)
+                        <option {{ @$val['reason'] == $id ? 'selected' : '' }} value="{{$id}}">{{$value}}</option>
+                    @endforeach
+                </select>
+                {{-- {!! Form::select('reason', @$filters_data['reasons'] , @$val['reason'] , ['class' => 'custom-select custom-select-sm onChangeUpdateStatusReason','placeholder'=>'Reason','id'=>'reason_'.$val['id'],'data-id'=>$val['id'],'data-type'=>'reason','data-route'=>route('enquiries.update',$val['id'])]) !!} --}}
               </div>
               <div class="col-4 f-btn py-2">
                 <a href="{{route('enquiries.show',$val['id'])}}"
@@ -55,6 +65,10 @@
             </div>
           </div>
         </div>
-      @endforeach
-    @endif
+        @empty
+        <p class="text-center my-5 m-auto">Oops, No Enquiries here! </p>
+      @endforelse
+</div>
+<div class="ajax-load text-center" style="display:none">
+    <p><img src={{ asset('images/loader.gif') }}>Loading Enquiries</p>
 </div>

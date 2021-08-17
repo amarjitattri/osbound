@@ -20,6 +20,8 @@ class Job extends Model
                             'description',
                             'job_type',
                             'job_type_slug',
+                            'reason',
+                            'status',
                             'is_active',
                         ];  
 
