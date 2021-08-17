@@ -66,8 +66,8 @@
         <button class="btn btn-sm btn-block btn-outline-primary" id="search_enquiry">Search</button>
       </div>
       <div class="col-md-1">
-        <a href="{{ route($baseRoute.'.index') }}" class="btn btn-sm btn-block btn-outline-secondary active">Back To
-          All</a>
+        <button class="btn btn-sm btn-block btn-outline-secondary active" id="reset_filter_form">Back To
+          All</button>
       </div>
     </div>
   </form>

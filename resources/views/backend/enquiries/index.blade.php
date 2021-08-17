@@ -43,6 +43,16 @@ $baseRoute= "enquiries";
 @section('customjs')
   @parent
   <script>
+    $(document).ready(function(){
+        $("#reset_filter_form").click(function(e){
+          e.preventDefault();
+            $("#enquiry_filter_form").trigger("reset");
+            $("#search_enquiry").trigger("click");
+
+        });
+    });
+  </script>
+  <script>
 
     $(document).on('click', '#search_enquiry', function (e) {
       e.preventDefault();

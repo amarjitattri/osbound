@@ -12,6 +12,20 @@
         <button type="button" class="btn btn-sm btn-primary btn-block" id="store_job_tag"> Add</button>
     </div>
 </div>
+<div class="row" id="multisearch_job_tag_form">
+    <div class="col-md-6"></div>
+    <div class="col-md-4">
+        <div class="form-group row">
+            <label for="searched_tags" class="col-md-6 col-form-label">Multi Search</label>
+            <div class="col-md-6">
+                <input class="form-control form-control-sm" name="searched_tags" type="text" value="" id="searched_tags">
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <button type="button" class="btn btn-sm btn-primary btn-block" id="search_multitag"> Search</button>
+    </div>
+</div>
   {{-- <div class="row">
     <div class="col-md-6"></div>
     <div class="col-md-4">
@@ -195,7 +209,32 @@
         }); 
     });
 </script>
-    <script>
+<script>
+
+        $("#multisearch_job_tag_form").validate({
+            submitHandler: function (form) {
+                $(form).ajaxSubmit({
+                // resetForm: true,
+                method: "GET",
+                url: "{{ route('jobtags.index')}}",
+                data: {
+                    'update_list' : '1'
+                },
+                success: function (responseText, statusText, xhr, $form) {
+                    
+                    updateTagLists(responseText);
+                }
+            });
+            return false;
+        }
+        });
+        $('#search_multitag').click(function(){
+            $('#multisearch_job_tag_form').submit();
+        })
+
+</script>
+
+<script>
 
         $("#store_job_tag_form").validate({
             submitHandler: function (form) {
@@ -235,7 +274,7 @@
             $('#store_job_tag_form').submit();
         })
 
-    </script>
+</script>
 
 <script> 
 
