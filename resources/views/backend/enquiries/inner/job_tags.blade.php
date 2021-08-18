@@ -283,13 +283,13 @@
         $('#alltagslist').multiselect({ 
 
             nonSelectedText: 'Select Tag', 
-            enableFiltering: true, 
-            enableCaseInsensitiveFiltering: true, 
+            enableFiltering: false, 
+            enableCaseInsensitiveFiltering: false, 
             buttonContainer: '<div class="jobspecificlist"></div>',
             buttonClass: '',
             templates: {
                 button: '',
-                ul: '<ul class="multiselect-container checkbox-list"></ul>',
+                ul: '<ul class="multiselect-container checkbox-list pt-4"></ul>',
                 option: '<a class="multiselect-option text-dark text-decoration-none"></a>'
             }
         
