@@ -13,9 +13,33 @@ class JobTagController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+
+
+        if($request->json() && $request['update_list']){
+            
+            $job_all_tags = JobTag::doesntHave('jobs');
+
+            if(@$request['searched_tags']){
+
+                $all_tags = explode(',' , $request['searched_tags']);
+                // dd($all_tags);
+                $job_all_tags = $job_all_tags->where(function ($query) use($all_tags) {
+                    for ($i = 0; $i < count($all_tags); $i++){
+                        if(trim($all_tags[$i]))
+                            $query->orwhere('tag', 'like',  '%' . trim($all_tags[$i]) .'%');
+                    }      
+               });
+            }
+            
+            
+            $job_all_tags = $job_all_tags->where('is_active','1')->get();
+            $job_specific_tags = JobTag::has('jobs')->where('is_active','1')->get();
+
+            return response()->json(['job_all_tags'=> $job_all_tags, 'job_specific_tags' => $job_specific_tags]);
+
+        }
     }
 
     /**
@@ -133,7 +157,7 @@ class JobTagController extends Controller
     
     public function destroyMultiple(Request $request)
     {
-        
+
         if($request['delete_from_job_specific_tags'])
         {
             $job = Job::findOrFail($request['job_id']);

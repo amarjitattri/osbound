@@ -8,6 +8,7 @@ use App\Models\JobTag;
 use App\Models\Contact;
 use App\Models\Client;
 use Illuminate\Support\Str;
+use DB;
 
 class EnquiryController extends Controller
 {
@@ -18,29 +19,94 @@ class EnquiryController extends Controller
      */
     public function index(Job $job, Contact $contact, Client $client , Request $request)
     {
-        if(@$request['job_no'])
-            $job->where('job_no', $request['job_no']);
-        if(@$request['contact_name'])
-            $contact->where('contact_name', 'like' , '%'.$request['contact_name'].'%');
-        if(@$request['client_name'])
-            $client->where('client_name' , 'like' , '%'.$request['client_name'].'%');
+        
+        $enquiries = Job::join('contacts','jobs.contact_id' , '=', 'contacts.id')
+                            ->join('clients','clients.id', '=','contacts.client_id')
+                            ->select([
+                                'jobs.*',
+                                'clients.id AS client_id',
+                                'contacts.id AS contact_id',
+                                'clients.client_name',
+                                'contacts.first_name',
+                                'contacts.last_name',
+                                'contacts.email',
+                                'contacts.mobile',
+                                'contacts.telephone',
+                            ]);
 
-        $enquiries = $job->where(['job_type_slug' => 'enquiries' , 'is_active' => 1])->get();
+        $enquiries_indicators = clone $enquiries;
+        
+        if(@$request['job_no'])
+            $enquiries->where('jobs.job_no', $request['job_no']);
+        if(@$request['contact_id']){
+            $enquiries->where('contacts.id', $request['contact_id']);
+        }
+        if(@$request['client_id'])
+        {
+            $enquiries->where('clients.id' ,$request['client_id']);
+        }
+        if(@$request['date_from'])
+        {
+            // return response()->json([\Carbon\Carbon::createFromFormat('d-m-Y' , $request['date_from'])->toDateString()]);
+            $enquiries->whereDate('jobs.created_at','>=',(\Carbon\Carbon::createFromFormat('d-m-Y' , $request['date_from'])->toDateString()));
+        }
+        if(@$request['date_to'])
+        {
+            $enquiries->whereDate('jobs.created_at','<=',(\Carbon\Carbon::createFromFormat('d-m-Y' , $request['date_to'])->toDateString()));
+        }
+        if(@$request['status'])
+        {
+            $enquiries->where('jobs.status', $request['status']);
+        }
+        if(@$request['reason'])
+        {
+            $enquiries->where('jobs.reason', $request['reason']);
+        }
+
+        $enquiries = $enquiries->where(['jobs.job_type_slug' => 'enquiries' , 'jobs.is_active' => 1])->get();
+       
+
+        $filters_data = \Config::get('constants.forms.enquiries.filters');
+
+        if($request->ajax()){
+            return view('backend.enquiries.inner.listing_cards' , [
+                'enquiries' => $enquiries,
+                'filters_data' => $filters_data
+            ]);
+        }
         $contacts = $contact->where(['is_active' => 1])->get();
         $clients = $client->where(['is_active' => 1])->get();
 
-        $filters_data = \Config::get('constants.forms.enquiries.filters');
+        $keyPerformance = [];
+
+        $enquiries_indicators = $enquiries_indicators->where(['jobs.job_type_slug' => 'enquiries' , 'jobs.is_active' => 1])->get();
+        // dd($enquiries);
+        //For Status
+
+        $keyPerformance['total_count'] = $enquiries_indicators->count();
         
-        $table_data = Job::join('contacts', 'contacts.id' , '=','jobs.contact_id')->join('clients', 'clients.id', '=', 'contacts.client_id')
-                            ->select(['jobs.*' , 'clients.client_name', 'contacts.first_name','contacts.last_name','contacts.email','contacts.mobile','contacts.telephone'])
-                            ->where('jobs.job_type_slug' , 'enquiries')->where('jobs.is_active' , '1')->orderBy('jobs.updated_at', 'desc')->get();
-        // dd($filters_data);
+        foreach(@$filters_data['status'] as $i => $data){
+            $keyPerformance['status'][] = [
+                'id' => $i,
+                'title' => $data,
+                'total' => $enquiries_indicators->where('status' , $i)->count()
+            ];
+        }
+        //For reasons
+        foreach(@$filters_data['reasons'] as $i => $data){
+            $keyPerformance['reason'][] = [
+                'id' => $i,
+                'title' => $data,
+                'total' => $enquiries_indicators->where('reason' , $i)->count()
+            ];
+        }
+        // dd($keyPerformance);
+
         return view('backend.enquiries.index', ['enquiries' => $enquiries , 
                                                 'contacts' => $contacts, 
                                                 'clients'=> $clients, 
-                                                'tableData' => @$table_data,
                                                 'filters_data' => $filters_data, 
-                                                'list' => []
+                                                'keyPerformance' => $keyPerformance
                                             ]);
     }
 
@@ -155,6 +221,33 @@ class EnquiryController extends Controller
         // dd($request->all());
         $job = Job::findOrFail($id);
         
+
+        if($request->ajax())
+        {
+            if(@$request['type'] == 'reason')
+            {
+                $this->validate($request, [
+                    'reason' => 'required'
+                ]);
+
+                $job->update([
+                    'reason' => $request['reason']
+                ]);
+            }
+            elseif(@$request['type'] == 'status')
+            {
+                $this->validate($request, [
+                    'status' => 'required'
+                ]);
+
+                $job->update([
+                    'status' => $request['status']
+                ]);
+            }
+
+            return response()->json($job);
+        }
+
         $job->update([
             'description' => $request['description'] ?? null
         ]);

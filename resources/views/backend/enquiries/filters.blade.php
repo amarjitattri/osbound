@@ -12,7 +12,7 @@
         </select>
       </div>
       <div class="col-md-2 pr-1">
-        {!! Form::text('date_form', request('date_form'), ['class' => 'form-control form-control-sm datepicker','placeholder'=>'Date From']) !!}
+        {!! Form::text('date_from', request('date_from'), ['class' => 'form-control form-control-sm datepicker','placeholder'=>'Date From']) !!}
       </div>
       <div class="col-md-2 pr-1">
         <select name="contact_id" id="contact_id" class="custom-select custom-select-sm">
@@ -47,7 +47,7 @@
       </div>
       <div class="col-md-2 pr-1">
         
-        <select name="cliwnt_id" id="cliwnt_id" class="custom-select custom-select-sm">
+        <select name="client_id" id="client_id" class="custom-select custom-select-sm">
           <option value="">Client Name</option>
           @foreach ($clients as $client)
             <option
@@ -66,8 +66,8 @@
         <button class="btn btn-sm btn-block btn-outline-primary" id="search_enquiry">Search</button>
       </div>
       <div class="col-md-1">
-        <a href="{{ route($baseRoute.'.index') }}" class="btn btn-sm btn-block btn-outline-secondary active">Back To
-          All</a>
+        <button class="btn btn-sm btn-block btn-outline-secondary active" id="reset_filter_form">Back To
+          All</button>
       </div>
     </div>
   </form>

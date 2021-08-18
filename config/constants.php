@@ -13,12 +13,16 @@ return [
         'enquiries' => [
             'filters' => [
                 'reasons' => [
-                    '1' => "Active",
-                    '2' => 'Not Active'
+                    '1' => "Too expensive",
+                    '2' => 'Found Convenient alternative',
+                    '3' => 'Slow response to enquiry',
+                    '4' => 'Another competitor contracted',
+                    '5' => 'Client not contactable'
                 ],
                 'status' => [
-                    '1' => 'Active',
-                    '2' => 'Not Active'
+                    '1' => 'Live',
+                    '2' => 'Converted',
+                    '3' => 'Closed'
                 ]
             ],
             'general_enquiry_questions' => [
