@@ -2,7 +2,7 @@
     $client_id = request('clients_and_contact');
     $client_detail = $all_clients->where('id', $client_id)->first();
 @endphp
-<form autocomplete="off" method="POST" action="{{ route('clients-and-contacts.update',['clients_and_contact' => $client_id]) }}">
+<form id="client_form" autocomplete="off" method="POST" action="{{ route('clients-and-contacts.update',['clients_and_contact' => $client_id]) }}">
     <input type="hidden" name="_method" value="PUT">
     {{ csrf_field() }}
 
@@ -16,7 +16,7 @@
             </select>
         </div>
         <div class="col-md-1 pr-1 py-1 ml-auto">
-            <button type="submit" class="btn btn-sm btn-primary btn-block">Save</button>
+            <button type="submit" class="btn btn-sm btn-primary btn-block" id="client_form_submit">Save</button>
         </div>
         <div class="col-md-2 pr-1 py-1">
             <a href="{{ route('clients-and-contacts.index') }}" class="btn btn-sm btn-outline-secondary btn-block">Back to Summary</a>
@@ -32,21 +32,22 @@
                 {!! Form::text('client_id', $client_id , ['class' => 'form-control form-control-sm','placeholder'=>'Client_id']) !!}
             </div>
             <div class="col-md-3 pr-1 py-1">
-                {!! Form::text('address_line_1',$client_detail['address_line_1'] ?? '' , ['class' => 'form-control form-control-sm','placeholder'=>'Address Line 1']) !!}
+                {!! Form::text('address_line_1',$client_detail['address_line_1'] ?? '' , ['class' => 'form-control input-field form-control-sm','placeholder'=>'Address Line 1']) !!}
             </div>
             <div class="col-md-3 pr-1 py-1">
-                {!! Form::text('town', $client_detail['town'] ?? '', ['class' => 'form-control form-control-sm','placeholder'=>'Town']) !!}
+                {!! Form::text('town', $client_detail['town'] ?? '', ['class' => 'form-control input-field form-control-sm','placeholder'=>'Town']) !!}
             </div>
             <div class="col-md-3 pr-1 py-1">
-                {!! Form::text('country',$client_detail['country'] ?? '', ['class' => 'form-control form-control-sm','placeholder'=>'Country']) !!}
+                {!! Form::text('country',$client_detail['country'] ?? '', ['class' => 'form-control input-field form-control-sm','placeholder'=>'Country']) !!}
             </div>
             <div class="col-md-2 pr-1 py-1">
-                {!! Form::text('postal_code', $client_detail['postal_code'] ?? '', ['class' => 'form-control form-control-sm','placeholder'=>'Postal Code']) !!}
+                {!! Form::text('postal_code', $client_detail['postal_code'] ?? '', ['class' => 'form-control input-field form-control-sm','placeholder'=>'Postal Code']) !!}
             </div>
         </div>
     </fieldset>
 </form>
-
+@section('customjs')
+@parent
 <script>
     function changeSelectedPath(){
         var client_id = document.getElementById("select_client_id").value;
@@ -54,3 +55,22 @@
     }
     
 </script>
+<script>
+    $( document ).ready(function() {
+          $("#client_form_submit").click(function( event ) {
+             event.preventDefault();
+             var hasInput=false;
+              $('.input-field').each(function () {
+               if($(this).val()  !== ""){
+                hasInput=true;
+               }
+              }); 
+              if(!hasInput){
+                toastr.error('Please provide some input!');
+               }else{
+                  $('#client_form').submit();
+               }
+          }); 
+    });
+</script>
+@endsection

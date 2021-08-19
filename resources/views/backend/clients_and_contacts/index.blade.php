@@ -63,6 +63,14 @@
             })
         });
     </script>
+    <script>
+        $(document).ready(function() {
+            $('#filter_reset_button').click(function(e) {
+                $('#filter_form').trigger('reset');
+                $('#filter_submit_button').trigger('click');
+            });
+        });
+    </script>
     <script type="text/javascript">
         var page = 1;
         window.max_pages = 10;
@@ -119,6 +127,12 @@
                                         </td>
                                     </tr>`;
                         });
+                    }
+                    else
+                    {
+                        html_data += `<tr>
+                                        <td colspan="11" class="text-center"> -- No Record Found -- </td>
+                                      </tr>`;
                     }
 
                     $('.ajax-load').hide();

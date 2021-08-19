@@ -21,10 +21,10 @@ $baseRoute= "enquiries";
         </div>
         <div class="col-md-8">
           <div class="action-btn-wrapper">
-            <a href="https://dev.data-solve.co.uk/dev/ot/enquiry-email-contact/28"
+            <a href="{{route('jobemails.show',['jobemail'=>$job_data['id']])}}"
               class="btn btn-sm btn-info btn-ot"> Email
               Contact</a>
-            <a href="https://dev.data-solve.co.uk/dev/ot/enquiry/estimate/28"
+            <a href="javascript::void(0);"
               class="btn btn-sm btn-success btn-ot"> Convert To
               Estimate</a>
             <button type="button" class="btn btn-sm btn-primary btn-ot" id="updateEnquiryBtn"> Save

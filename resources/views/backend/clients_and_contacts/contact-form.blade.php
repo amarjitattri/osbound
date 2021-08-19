@@ -34,22 +34,22 @@
         @endif
         <div class="row no-gutters mb-2 justify-content-between">
             <div class="col-md-1 pr-1 py-1 d-none">
-                {!! Form::text('from', 'contact_form' , ['class' => 'form-control form-control-sm','placeholder'=>'From']) !!}
+                {!! Form::text('from', 'contact_form' , ['class' => 'form-control form-control-sm','placeholder'=>'From', 'required']) !!}
             </div>
             <div class="col-md-1 pr-1 py-1 d-none">
-                {!! Form::text('client_id',$client_id , ['class' => 'form-control form-control-sm','placeholder'=>'Client ID']) !!}
+                {!! Form::text('client_id',$client_id , ['class' => 'form-control form-control-sm','placeholder'=>'Client ID', 'required']) !!}
             </div>
             <div class="col-md-1 pr-1 py-1 d-none">
                 {!! Form::text('contact_id',$contact_id ?? '' , ['class' => 'form-control form-control-sm','placeholder'=>'Contact ID']) !!}
             </div>
             <div class="col-md-1 pr-1 py-1">
-                {!! Form::text('first_name',$contact_detail['first_name'] ?? '' , ['class' => 'form-control form-control-sm','placeholder'=>'First Name']) !!}
+                {!! Form::text('first_name',$contact_detail['first_name'] ?? '' , ['class' => 'form-control form-control-sm','placeholder'=>'First Name' , 'required']) !!}
             </div>
             <div class="col-md-1 pr-1 py-1">
-                {!! Form::text('last_name', $contact_detail['last_name'] ?? '', ['class' => 'form-control form-control-sm','placeholder'=>'Last Name']) !!}
+                {!! Form::text('last_name', $contact_detail['last_name'] ?? '', ['class' => 'form-control form-control-sm','placeholder'=>'Last Name', 'required']) !!}
             </div>
             <div class="col-md-2 pr-1 py-1">
-                {!! Form::text('job_title',$contact_detail['job_title'] ?? '', ['class' => 'form-control form-control-sm','placeholder'=>'Job Title']) !!}
+                {!! Form::text('job_title',$contact_detail['job_title'] ?? '', ['class' => 'form-control form-control-sm','placeholder'=>'Job Title','required' ]) !!}
             </div>
             <div class="col-md-2 pr-1 py-1">
                 {!! Form::text('email', $contact_detail['email'] ?? '', ['class' => 'form-control form-control-sm','placeholder'=>'Email']) !!}

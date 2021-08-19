@@ -51,6 +51,12 @@ class ClientsAndContactsController extends Controller
         
         if(@$request['from'] == 'contact_form') {
 
+            $this->validate($request, [
+                'first_name' => 'required',
+                'last_name' => 'required',
+                'job_title' => 'required'
+            ]);
+
             $client_id = $request['client_id'] ?? null;
             $first_name = $request['first_name'] ?? null;
             $last_name = $request['last_name'] ?? null;
