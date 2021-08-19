@@ -9,7 +9,7 @@
                     <span class="pcoded-mcaret"></span>
                 </a>
             </li>
-            <li class="{{ isActiveMenu(['enquiries','enquiries/create']) }}">
+            <li class="{{ isActiveMenu('enquiries') }}">
                 <a href="{{ route('enquiries.index') }}">
                     <span class="pcoded-micon"><i class="ti-home"></i><b>E</b></span>
                     <span class="pcoded-mtext">Enquiries</span>

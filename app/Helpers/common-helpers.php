@@ -36,6 +36,13 @@
             if (is_array($path)) {
                 return in_array($cPath, $path) ? $class_name : '';
             }
+            
+            $arrPath = explode('/',$cPath);
+            if(count($arrPath) > 1)
+            {
+                return in_array($path, $arrPath) ? $class_name : '';
+            }
+
             return $cPath == $path ? $class_name : '';
         }
     }
