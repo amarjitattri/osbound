@@ -17,7 +17,6 @@ class CreateJobEmailsTable extends Migration
             $table->id();
 
             $table->bigInteger('job_id')->unsigned();
-            $table->bigInteger('contact_id')->unsigned();
 
             $table->string('from')->nullable();
             $table->string('to')->nullable();
@@ -30,7 +29,6 @@ class CreateJobEmailsTable extends Migration
             $table->timestamps();
 
             $table->foreign('job_id')->references('id')->on('jobs')->onDelete('cascade');
-            $table->foreign('contact_id')->references('id')->on('contacts')->onDelete('cascade');
 
         });
     }
