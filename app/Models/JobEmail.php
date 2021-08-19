@@ -11,6 +11,7 @@ class JobEmail extends Model
 
     protected $fillable = [
         'job_id',
+        'contact_id',
         'job_type_slug',
         'from',
         'to',

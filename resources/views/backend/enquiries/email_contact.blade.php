@@ -32,7 +32,7 @@
                         <div class="form-group row">
                             {!! Form::label('to', 'To',['class'=>'col-2 col-form-label']) !!}
                             <div class="col-10">
-                                {!! Form::email('to', @$enquiry->contacts->email,['class' => 'form-control','placeholder'=>'To','required']) !!}
+                                {!! Form::email('to', @$job_data['contact']['email'],['class' => 'form-control','placeholder'=>'To','required']) !!}
                             </div>
                         </div>
                         <div class="form-group row">

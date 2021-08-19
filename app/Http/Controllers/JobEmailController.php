@@ -90,7 +90,7 @@ class JobEmailController extends Controller
      */
     public function show($job_id)
     {
-        $job_data = Job::select(['id','job_no','job_type_slug'])->where('id',$job_id)->first();
+        $job_data = Job::with(['contact'])->where('id',$job_id)->first();
         
         return view('backend.enquiries.email_contact',['job_data' => $job_data]);
     }
