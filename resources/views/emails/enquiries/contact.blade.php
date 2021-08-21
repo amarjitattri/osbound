@@ -1,5 +1,5 @@
 @component('mail::message')
-    {!! request('message') !!}
+    {!! $jobemail->message !!}
 
     {!! config('app.name') !!}
 @endcomponent
