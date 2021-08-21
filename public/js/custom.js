@@ -247,3 +247,18 @@ $(function () {
 });
 
 
+$(document).ready(function () {
+    $('#tasks .input-group-addon').click(function (e) {
+      $(this).siblings("input").trigger('focus');
+    });
+    $("#jobtags .ms-list li").click(function () {
+      $(this).addClass('selected').siblings().removeClass('selected');
+    });
+    $("#apj-nav-tabs .nav-item a").click(function () {
+      $("#apj-nav-tabs .nav-item a").removeClass('active');
+      $(this).addClass('active');
+      var newpane = $(this).attr("href");
+      $(".apj-tab-s .tab-pane").removeClass('active');
+      $(newpane).addClass('active');
+    });
+  });
