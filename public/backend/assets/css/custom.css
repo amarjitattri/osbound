@@ -660,3 +660,14 @@ span.ot-right.ot-enq_date {
     transform: translateY(-5px);
   }
 }
+#enquiry_filter_form .apj-add-new-page-btn{
+    width: 75%;
+    float: right;
+}
+.tfcr-checkbox .custom-checkbox{
+    margin-top: 7px;
+    z-index: 999;
+}
+.apj-general-enquiry-questions-tbl tr>th{
+    text-align: center;
+}

@@ -1,8 +1,9 @@
 <fieldset>
   <legend>General Enquiry Questions</legend>
   <div class="row">
-    <div class="col-md-12">
-      @if($enquiry_for = @$general_enquiry_questions['enquiry_for'])
+  <div class="col-md-6">
+  <div class="col-md-12">
+  @if($enquiry_for = @$general_enquiry_questions['enquiry_for'])
       <div class="form-group row">
         <label for="{{ $enquiry_for['field'] }}" class="col-md-4 col-form-label">{{ $enquiry_for['title'] }}</label>
         <div class="col-md-8">
@@ -15,7 +16,11 @@
         </div>
       </div>
       @endif
-      {{-- @if($enquiry_owner = @$general_enquiry_questions['enquiry_owner'])
+
+  </div>
+
+  <div class="col-md-12">
+  {{-- @if($enquiry_owner = @$general_enquiry_questions['enquiry_owner'])
       <div class="form-group row">
       <label for="{{ $enquiry_owner['field'] }}" class="col-md-4 col-form-label">{{ $enquiry_owner['title'] }}</label>
       <div class="col-md-8">
@@ -28,7 +33,13 @@
       </div>
       </div>
       @endif --}}
-      @if($hear_from = @$general_enquiry_questions['hear_from'])
+
+  </div>
+
+
+
+  <div class="col-md-12">
+  @if($hear_from = @$general_enquiry_questions['hear_from'])
       <div class="form-group row">
         <label for="{{ $hear_from['field'] }}" class="col-md-4 col-form-label">{{ $hear_from['title'] }}</label>
         <div class="col-md-8">
@@ -41,54 +52,90 @@
         </div>
       </div>
       @endif
-      
-      <div class="form-group row">
-        <label for="transport_for" class="col-md-4 col-form-label">Transport For
-            Collection Required</label>
-        <div class="col-md-1">
-            <div class="custom-control custom-checkbox" style="margin-top: 7px;">
+  </div>
+
+
+
+  <div class="col-md-12">
+  <div class="form-group row">
+  <label for="transport_for" class="col-md-4 col-form-label">Transport For Collection Required</label>
+        <div class="col-md-1 tfcr-checkbox">
+            <div class="custom-control custom-checkbox">
                 <input type="checkbox" name="transport_require" @if((old('transport_require') == 'on' || @$job_data['generalEnquiryQuestion']['transport_require'] == '1')) checked @endif>
-              
+
             </div>
         </div>
         <div class="col-md-7">
             <input class="form-control date_timepicker" name="transport_require_date"
             type="text" value="{{ (old('transport_require_date') ?? @$job_data['generalEnquiryQuestion']['transport_require_date']) }}" id="transport_require_date">
         </div>
-      </div>
-      <div class="row text-center">
-        <div class="col-md-6">
-            <label for="express_quotation" class="control-label">Express Quotation</label>
-            <div class="custom-control custom-checkbox">
-                <input type="checkbox" name="express_quotation" @if((old('express_quotation') == 'on' || @$job_data['generalEnquiryQuestion']['express_quotation'] == '1')) checked @endif>
-                
-            {{-- <input class="custom-control-input" name="express_quotation" type="checkbox"
-                value="{{ (old('express_quotation') ?? @$job_data['generalEnquiryQuestion']['express_quotation']) }}" id="express_quotation">
-            <label class="custom-control-label" for="express_quotation">&nbsp;</label> --}}
-            </div>
         </div>
-        <div class="col-md-6">
-            <label for="quotation_required_by" class="control-label">Quotation Required By</label>
+
+
+  </div>
+
+
+
+
+
+</div>
+
+<div class="col-md-6">
+
+
+<div class="col-md-12">
+
+
+<div class="form-group row">
+<label for="express_quotation" class="col-md-4 col-form-label">Express Quotation</label>
+<div class="col-md-1">
+<div class="custom-control custom-checkbox" style="margin-top: 7px;">
+        <input type="checkbox" name="express_quotation" @if((old('express_quotation') == 'on' || @$job_data['generalEnquiryQuestion']['express_quotation'] == '1')) checked @endif>
+
+    {{-- <input class="custom-control-input" name="express_quotation" type="checkbox"
+        value="{{ (old('express_quotation') ?? @$job_data['generalEnquiryQuestion']['express_quotation']) }}" id="express_quotation">
+    <label class="custom-control-label" for="express_quotation">&nbsp;</label> --}}
+    </div>
+
+</div>
+</div>
+
+</div>
+<div class="col-md-12">
+  <div class="form-group row">
+  <label for="quotation_required_by" class="control-label col-md-4">Quotation Required By</label>
+  <div class="col-md-8">
             <input class="form-control date_timepicker"
             name="quotation_required_by" type="text" value="{{ (old('quotation_required_by') ?? @$job_data['generalEnquiryQuestion']['quotation_required_by']) }}" id="quotation_required_by">
-        </div>
-      </div>
-      <div class="row text-center">
-        <div class="col-md-6">
-            <label for="contract_start" class="control-label">Contract Start</label>
+  </div>
+  </div>
+  </div>
+<div class="col-md-12">
+  <div class="form-group row">
+
+            <label for="contract_start" class="control-label col-md-4">Contract Start</label>
+            <div class="col-md-8">
             <input class="form-control datepicker" name="contract_start" type="text"
             value="{{ (old('contract_start') ?? @$job_data['generalEnquiryQuestion']['contract_start']) }}" id="contract_start">
         </div>
-        <div class="col-md-6">
-            <label for="contract_finish" class="control-label">Contract Finish</label>
+        </div>
+  </div>
+<div class="col-md-12">
+  <div class="form-group row">
+  <label for="contract_finish" class="control-label col-md-4">Contract Finish</label>
+  <div class="col-md-8">
             <input class="form-control datepicker" name="contract_finish" type="text"
             value="{{ (old('contract_finish') ?? @$job_data['generalEnquiryQuestion']['contract_finish']) }}" id="contract_finish">
-        </div>
-      </div>
-    </div>
+  </div>
+  </div>
+  </div>
+</div>
+</div>
+
+<div class="row">
     <div class="col-md-12">
       <div class="table-responsive">
-        <table class="table table-borderless table-condensed">
+        <table class="table table-borderless table-condensed apj-general-enquiry-questions-tbl">
           <thead>
             <tr>
                 <th width="30%">Site Type</th>
@@ -118,7 +165,7 @@
                   <textarea class="form-control" rows="3" name="site[{{ $count }}][site_address]"
                       cols="50">{{ old('site['.$count.'][site_address]') ?? @$job_data['generalEnquiryQuestion']['site'][$count]['site_address'] }}</textarea>
                   </td>
-                  <td>    
+                  <td>
                   <input class="form-control" name="site[{{$count}}][postal_code]" type="number" value="{{ old('site['.$count.'][postal_code]') ?? @$job_data['generalEnquiryQuestion']['site'][$count]['postal_code'] }}">
                   </td>
               </tr>
