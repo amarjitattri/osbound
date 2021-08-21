@@ -15,6 +15,11 @@ class JobEmail extends Model
         'from',
         'to',
         'subject',
-        'message'
+        'message',
+        'attachments'
+    ];
+
+    protected $casts = [
+        'attachments' => 'array',
     ];
 }
