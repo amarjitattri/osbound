@@ -7,6 +7,7 @@ use App\Models\Job;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\JobEmailer;
+use File;
 
 class JobEmailController extends Controller
 {
@@ -46,21 +47,35 @@ class JobEmailController extends Controller
             'message' => 'required'
         ]);
 
-        $jobemail = JobEmail::create([
+        // dd($request->all());
+
+        $data = [
             'job_id' => $request['job_id'],
             'job_type_slug' => $request['job_type_slug'],
             'from' => $request['from'],
             'to' => $request['to'],
             'subject' => $request['subject'] ?? '',
-            'message' => $request['message'] ?? ''
-        ]);
+            'message' => $request['message'] ?? '',
+        ];
+
+        if($request->has('photography_auth_form') && File::exists(public_path($request['photography_auth_form']))){
+            $data['attachments']['photography_auth_form'] = $request['photography_auth_form'];
+        }
+        if($request->has('terms_and_conditions') && File::exists(public_path($request['terms_and_conditions']))){
+            $data['attachments']['terms_and_conditions'] = $request['terms_and_conditions'];
+        }
+        if($request->has('has_image_gallery') && count(@$request['image_gallery'])){
+            $data['attachments']['image_gallery'] = $request['image_gallery'];
+        }
+
+        $jobemail = JobEmail::create($data);
 
         Mail::to($request['to'])->queue(new JobEmailer($jobemail));
 
         \Session::flash('type', 'success');
         \Session::flash('message','Email has been sent successfully!');
 
-        return redirect()->back();
+        return redirect()->route('enquiries.show',['enquiry' => $request['job_id']]);
         // $data["email"] = "websolutionstuff@gmail.com";
         // $data["title"] = "websolutionstuff.com";
         // $data["body"] = "This is test mail with attachment";

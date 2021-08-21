@@ -35,6 +35,58 @@
                                 {!! Form::email('to', @$job_data['contact']['email'],['class' => 'form-control','placeholder'=>'To','required']) !!}
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group row">
+                                    {!! Form::label('photography_auth_form', 'Photography Authorisation Form',['class'=>'col-4 col-form-label']) !!}
+                                    <div class="col-8">
+                                        {!! Form::checkbox('photography_auth_form','storage/enquiries/photography_authorisation_form.pdf',null,['id' => 'photography_auth_form']) !!}
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    {!! Form::label('terms_and_conditions', 'Terms and Conditions',['class'=>'col-4 col-form-label']) !!}
+                                    <div class="col-8">
+                                        {!! Form::checkbox('terms_and_conditions','storage/enquiries/terms_and_conditions.pdf',null,['id' => 'terms_and_conditions']) !!}
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    {!! Form::label('has_image_gallery', 'Image Gallery',['class'=>'col-4 col-form-label']) !!}
+                                    <div class="col-8">
+                                        {!! Form::checkbox('has_image_gallery',null,null,['id' => 'has_image_gallery']) !!}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <ul class="enquiry_image_thumb set-width image_thumb_grid scroll">
+                                            @if ($job_data->images()->count())
+                                                @foreach ($job_data->images()->get() as $image)
+                                                    <li data-src="{{asset($image->path)}}" id="image_li_{{$image->id}}">
+                                                        <div class="enquiry_inner set-bg"
+                                                                style="background: url('{{asset($image->path)}}')">
+                                                            <div class="custom-control custom-checkbox">
+                                                                <input type="checkbox"
+                                                                        class="custom-control-input selected_images"
+                                                                        id="image_checkbox_{{$image->id}}"
+                                                                        name="image_gallery[]"
+                                                                        value="{{$image->path}}">
+                                                                <label class="custom-control-label"
+                                                                        for="image_checkbox_{{$image->id}}"></label>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                @endforeach
+                                            @else
+                                                <h5 class="p-t-50 p-b-50 m-auto">Images Not Found</h5>
+                                            @endif
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
                         <div class="form-group row">
                             {!! Form::label('subject', 'Subject',['class'=>'col-2 col-form-label']) !!}
                             <div class="col-10">

@@ -32,9 +32,30 @@ class JobEmailer extends Mailable
      */
     public function build()
     {
-        return $this->from($this->jobemail->from)
+        $email = $this->from($this->jobemail->from)
                     ->markdown('emails.enquiries.contact', [
                                                             'jobemail' => $this->jobemail,
-                                                        ]);
+                    ]);
+
+        if($this->jobemail->attachments)
+        {
+            if(@$this->jobemail->attachments['photography_auth_form'])
+            {
+                $email->attach($this->jobemail->attachments['photography_auth_form']);
+            }
+            if(@$this->jobemail->attachments['terms_and_conditions'])
+            {
+                $email->attach($this->jobemail->attachments['terms_and_conditions']);
+            }
+            if(@$this->jobemail->attachments['image_gallery'])
+            {
+                foreach($this->jobemail->attachments['image_gallery'] as $i=>$image) {
+                    $email->attach(public_path($image));
+                }
+            }
+        }
+
+        // dd($email);
+        return $email;
     }
 }
