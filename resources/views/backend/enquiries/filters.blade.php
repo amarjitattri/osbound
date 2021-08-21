@@ -32,10 +32,7 @@
 
       </div>
       <div class="col-md-2">
-        <a href="#" data-modal-width="70%"
-           data-modal-title="Add New {{ $pageName }}" data-toggle="modal"
-           data-load-url="{{ route($baseRoute.'.create') }}" data-target="#outboundsModel"
-           class="btn btn-sm btn-primary btn-block active">Add New {{ $pageName }}</a>
+
       </div>
     </div>
     <div class="row no-gutters">
@@ -46,7 +43,7 @@
         {!! Form::text('date_to', request('date_to'), ['class' => 'form-control form-control-sm datepicker','placeholder'=>'Date To']) !!}
       </div>
       <div class="col-md-2 pr-1">
-        
+
         <select name="client_id" id="client_id" class="custom-select custom-select-sm">
           <option value="">Client Name</option>
           @foreach ($clients as $client)
@@ -60,7 +57,10 @@
         {!! Form::select('reason', @$filters_data['reasons'] , request('reason') , ['class' => 'custom-select custom-select-sm','placeholder'=>'Reason']) !!}
       </div>
       <div class="col-md-2 pr-1">
-
+        <a href="#" data-modal-width="70%"
+           data-modal-title="Add New {{ $pageName }}" data-toggle="modal"
+           data-load-url="{{ route($baseRoute.'.create') }}" data-target="#outboundsModel"
+           class="btn btn-sm btn-primary btn-block active apj-add-new-page-btn">Add New {{ $pageName }}</a>
       </div>
       <div class="col-md-1 pr-1">
         <button class="btn btn-sm btn-block btn-outline-primary" id="search_enquiry">Search</button>
