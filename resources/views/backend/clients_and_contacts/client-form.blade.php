@@ -38,7 +38,7 @@
                 {!! Form::text('town', $client_detail['town'] ?? '', ['class' => 'form-control input-field form-control-sm','placeholder'=>'Town']) !!}
             </div>
             <div class="col-md-3 pr-1 py-1">
-                {!! Form::text('country',$client_detail['country'] ?? '', ['class' => 'form-control input-field form-control-sm','placeholder'=>'Country']) !!}
+                {!! Form::text('country',$client_detail['country'] ?? '', ['class' => 'form-control input-field form-control-sm','placeholder'=>'County']) !!}
             </div>
             <div class="col-md-2 pr-1 py-1">
                 {!! Form::text('postal_code', $client_detail['postal_code'] ?? '', ['class' => 'form-control input-field form-control-sm','placeholder'=>'Postal Code']) !!}

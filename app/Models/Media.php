@@ -17,5 +17,9 @@ class Media extends Model
     public function mediable(){
         return $this->morphTo('entity');
     }
+    
+    // public function job_tags(){
+    //     return $this->hasManyThrough(JobTag::class, Job::class);
+    // }
 
 }

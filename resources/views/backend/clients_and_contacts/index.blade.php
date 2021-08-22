@@ -25,7 +25,7 @@
                                         <th>Client Name</th>
                                         <th>Address Line 1</th>
                                         <th>Town</th>
-                                        <th>Country</th>
+                                        <th>County</th>
                                         <th>PostCode</th>
                                         <th>#</th>
                                     </tr>
@@ -119,13 +119,15 @@
                                             <td>${body['client']['country'] ?? ''}</td>
                                             <td>${body['client']['postal_code'] ?? ''}</td>
                                             <td class="d-inline-flex"><a href="{{route('clients-and-contacts.index')}}/${body['client_id']}" class="btn btn-sm btn-primary mx-1">Edit</a>
-                                            <form action="{{route('clients-and-contacts.index')}}/${body['id']}" method="POST">
-                                                <input class="btn btn-sm btn-danger" type="submit" value="Delete" />
-                                                <input type="hidden" name="_method" value="delete" />
-                                                <input type="hidden" name="_token" value="${csrf_token}">
-                                            </form>
                                         </td>
                                     </tr>`;
+                            //----- If Delete is required in list use this and add into the table
+
+                            //<form action="{{route('clients-and-contacts.index')}}/${body['id']}" method="POST">
+                            //<input class="btn btn-sm btn-danger" type="submit" value="Delete" />
+                            //<input type="hidden" name="_method" value="delete" />
+                            //<input type="hidden" name="_token" value="${csrf_token}">
+                            //</form>
                         });
                     }
                     else

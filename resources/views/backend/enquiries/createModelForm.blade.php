@@ -94,7 +94,7 @@
     </div>
   </div>
   <div class="form-group row">
-    {!! Form::label('country', 'Country',['class'=>'col-md-4 col-form-label']) !!}
+    {!! Form::label('country', 'County',['class'=>'col-md-4 col-form-label']) !!}
     <div class="col-md-8">
       {!! Form::text('country', null, ['class' => 'form-control form-control-sm','required']) !!}
     </div>

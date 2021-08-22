@@ -66,29 +66,32 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-5">
+                <div class="col-md-5" id="images_container" style="display: none;">
                     <div class="col-md-12">&nbsp;</div>
                     <div class="col-md-12">&nbsp;</div>
                     <div class="col-md-12">&nbsp;</div>
                     <div class="col-md-12">
                         <div class="form-group row">
-                            <label for="job_tag" class="col-md-12 col-form-label">Search Image Gallery With Tags</label>
+                            <label for="image_tags">Search Image Gallery With Tags</label>
+                            <select id="image_tags" name="image_tags[]" multiple class="form-control">
+                                @forelse($job_tags as $tag)
+                                    <option value="{{$tag['id']}}">{{$tag['tag']}}</option>
+                                @empty
+                                    <option disabled>No tags here!</option>
+                                @endforelse
+                            </select>
+                            {{-- <label for="job_tag" class="col-md-12 col-form-label">Search Image Gallery With Tags</label>
                             <div class="col-md-12">
                                 <select class="custom-select valid" id="enquiry_for" name="enquiry_for" aria-invalid="false">
                                     <option selected="selected" value=""></option>
                                     <option value="1">Osbond &amp; Tutt</option>
                                     <option value="2">London Spray Finishes</option>
                                 </select>
-                            </div>
+                            </div> --}}
                         </div>
                     </div><!-- /.col-md-12 -->
                     <div class="col-md-12">
-                        <div class="form-group row">
-                            <div class="col-md-12">
-                                <input class="form-control" placeholder="" required="" name="" type="text" id="">
-                            </div>
-                        </div>
-                        <ul class="enquiry_image_thumb set-width image_thumb_grid scroll">
+                        <ul class="enquiry_image_thumb set-width image_thumb_grid scroll" id="images_list">
                         @if ($job_data->images()->count())
                             @foreach ($job_data->images()->get() as $image)
                                 <li data-src="{{asset($image->path)}}" id="image_li_{{$image->id}}">
@@ -107,9 +110,14 @@
                                 </li>
                             @endforeach
                         @else
-                            <h5 class="p-t-50 p-b-50 m-auto">Images Not Found</h5>
+                            <h5 class="p-t-50 p-b-50 m-auto text-center">Images Not Found</h5>
                         @endif
                     </ul>
+                    <div style="display:none" id="ajax_loader">
+                        <div class="ajax-load text-center py-5">
+                            <p><img src={{ asset('images/loader.gif') }}></p>
+                        </div>
+                    </div>
                     </div><!-- /.col-md-12 -->
                 </div>
             </div>
@@ -125,8 +133,126 @@
     </div>
 </div>
 @endsection
+@section('header')
+@parent
+  {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />  --}}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css" />
+
+@endsection
 @section('customjs')
 <script>
     CKEDITOR.replace('message');
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>
+<script>
+    $(document).ready(function(){
+
+        $('#image_tags').multiselect({
+
+            nonSelectedText: 'Select Tags',
+            enableFiltering: true,
+            enableCaseInsensitiveFiltering: true,
+            buttonContainer: '<div class="border border-dark w-100 text-center"></div>',
+
+        });
+    });
+</script>
+<script>
+   var updateImages = function (data) {
+
+    if(data)
+    {
+        var htmlContent ='';
+        var asset_path = "{{ asset('') }}";
+        if(data.length){
+            data.forEach(function(val, index) {
+                htmlContent += `<li id="image_li_${val['id']}">
+                                    <div class="enquiry_inner set-bg"
+                                            style="background: url('${asset_path +val['path']}')">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox"
+                                                    class="custom-control-input selected_images"
+                                                    id="image_checkbox_${val['id']}"
+                                                    name="image_gallery[]"
+                                                    value="${val['path']}">
+                                            <label class="custom-control-label"
+                                                    for="image_checkbox_${val['id']}"></label>
+                                        </div>
+                                    </div>
+                                </li>`;
+            });
+        }
+        else
+        {
+            htmlContent += `<h5 class="p-t-50 p-b-50 m-auto text-center">Images Not Found</h5>`;
+        }
+        $('#images_list').html(htmlContent);
+
+    }
+
+}
+</script>
+<script>
+    $(document).ready(function(){
+        $('#image_tags').on('change', function(){
+            var tags = [];
+            $('#image_tags option:selected').each(function() {
+                tags.push($(this).val());
+            });
+            if(tags.length)
+            {
+                $.ajax({
+
+                    url: "{{route('jobemails.index')}}",
+                    method: "GET",
+                    data: {
+                        'job_id': "{{$job_data['id']}}",
+                        'tags' : tags,
+                        'update_content': '1'
+                    },
+                    beforeSend: function(){
+                        let loaderHTML = $('#ajax_loader').html();
+                        $('#images_list').html(loaderHTML);
+                    },
+                    success: function(data){
+                        $('#ajax_loader').hide();
+                        updateImages(data);
+                    }
+                });
+            }
+            else
+            {
+                $.ajax({
+
+                            url: "{{route('jobemails.index')}}"+"/{{ $job_data['id'] }}",
+                            method: "GET",
+                            data: {
+                                'update_content': '1'
+                            },
+                            beforeSend: function(){
+                                let loaderHTML = $('#ajax_loader').html();
+                                $('#images_list').html(loaderHTML);
+                            },
+                            success: function(data){
+                                updateImages(data);
+                            }
+                            });
+            }
+
+        });
+    });
+</script>
+<script>
+    $(document).ready(function(){
+        $('#has_image_gallery').on('change', function(){
+            if($(this).prop("checked")){
+                $('#images_container').show();
+            }
+            else{
+                $('#images_container').hide();  
+            }
+
+        });
+    });
 </script>
 @endsection
