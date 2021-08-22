@@ -59,13 +59,13 @@
   <div class="col-md-12">
   <div class="form-group row">
   <label for="transport_for" class="col-md-4 col-form-label">Transport For Collection Required</label>
-        <div class="col-md-1 tfcr-checkbox">
-            <div class="custom-control custom-checkbox">
+        <div class="col-md-1 tfcr-checkbox" style="margin-top: 7px;">
+
                 <input type="checkbox" name="transport_require" @if((old('transport_require') == 'on' || @$job_data['generalEnquiryQuestion']['transport_require'] == '1')) checked @endif>
 
-            </div>
+
         </div>
-        <div class="col-md-7">
+        <div class="col-md-7" id="transport_require_date_col">
             <input class="form-control date_timepicker" name="transport_require_date"
             type="text" value="{{ (old('transport_require_date') ?? @$job_data['generalEnquiryQuestion']['transport_require_date']) }}" id="transport_require_date">
         </div>

@@ -727,3 +727,15 @@ span.ot-right.ot-enq_date {
 .email_contact ul.enquiry_image_thumb li {
     width: 25%;
 }
+@media only screen and (min-width: 1260px) and (max-width: 1520px) {
+#transport_require_date_col{
+    flex: 0 0 55.666667%;
+    max-width: 55.666667%;
+ }
+}
+@media only screen and (min-width: 1200px) and (max-width: 1259px) {
+#transport_require_date_col{
+    flex: 0 0 53.666667%;
+    max-width: 53.666667%;
+}
+}
