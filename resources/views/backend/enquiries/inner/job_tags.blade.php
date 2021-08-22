@@ -42,13 +42,13 @@
     <div class="col-md-4" style="min-height: 450px;">
       <div class="form-group list-form-group">
         <label for="jobspecifictagslist">Tag List for this Job</label>
-        <select id="jobspecifictagslist" name="jobtags[]" multiple class="form-control"> 
+        <select id="jobspecifictagslist" name="jobtags[]" multiple class="form-control">
             @forelse($job_data['jobTags'] as $tag)
-                <option value="{{$tag['id']}}">{{$tag['tag']}}</option> 
+                <option value="{{$tag['id']}}">{{$tag['tag']}}</option>
             @empty
                 <option disabled>No tags here!</option>
             @endforelse
-        </select> 
+        </select>
         {{-- <div class="ms-selectable taglistforthisjob_div">
           <ul class="ms-list" tabindex="0">
           <li class="" id=""><a href="javascript:void();"><span>elem 1</span></a></li>
@@ -76,21 +76,21 @@
     <div class="col-md-2">
       <button type="button" class="text-center addselectedtext" id="add_selected_tags"><b>Add Selected Tag</b> <img src="{{ asset('images/hand-left-icon.png')}}" alt="icon"> </button>
     </div>
-    <div class="col-md-4 align-self-start" id="all_job_tags_section" style="min-height: 450px;">  
+    <div class="col-md-4 align-self-start" id="all_job_tags_section" style="min-height: 450px;">
         <div class="form-group list-form-group">
-            <div method="post" id="all_tags_form"> 
-                <div class="form-group"> 
+            <div method="post" id="all_tags_form">
+                <div class="form-group">
 
-                    <label for="alltagslist">Entire Tag List</label> 
-                    <select id="alltagslist" name="tags[]" multiple class="form-control"> 
+                    <label for="alltagslist">Entire Tag List</label>
+                    <select id="alltagslist" name="tags[]" multiple class="form-control">
                         @forelse($job_tags as $tag)
-                            <option value="{{$tag['id']}}">{{$tag['tag']}}</option> 
+                            <option value="{{$tag['id']}}">{{$tag['tag']}}</option>
                         @empty
                             <option disabled>No tags here!</option>
                         @endforelse
-                    </select>  
-                </div> 
-            </div> 
+                    </select>
+                </div>
+            </div>
             {{-- <label for="entiretaglist">Entire Tag List</label>
             <div class="ms-selectable entiretaglist_div">
                 <ul class="ms-list" tabindex="0">
@@ -114,7 +114,7 @@
                     <li class="" id=""><a href="javascript:void();"><span>elem 5</span></a></li>
                 </ul>
             </div> --}}
-        </div>     
+        </div>
     </div>
     <div class="col-md-2 align-self-end">
       <button type="button" class="btn btn-sm btn-danger btn-block" id="delete_selected_tags"> Delete Selected Tags From Entire List</button>
@@ -141,7 +141,7 @@
 @section('header')
 @parent
   {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />  --}}
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css" /> 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css" />
 <style type="text/css">
     .checkbox-list{
         border: 1px solid #000;
@@ -152,7 +152,7 @@
 @section('customjs')
 @parent
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>
 <script>
     var updateTagLists = function (data) {
 
@@ -191,22 +191,22 @@
     }
 </script>
 <script>
-    $(document).ready(function(){ 
-    
-        $('#jobspecifictagslist').multiselect({ 
+    $(document).ready(function(){
 
-            nonSelectedText: 'Select Tag', 
-            enableFiltering: true, 
-            enableCaseInsensitiveFiltering: true, 
-            buttonContainer: '<div class="jobspecificlist"></div>',
+        $('#jobspecifictagslist').multiselect({
+
+            nonSelectedText: 'Select Tag',
+            enableFiltering: true,
+            enableCaseInsensitiveFiltering: true,
+            buttonContainer: '<div class="jobspecificlist apj-jobspecificlist-left"></div>',
             buttonClass: '',
             templates: {
                 button: '',
                 ul: '<ul class="multiselect-container checkbox-list"></ul>',
                 option: '<a class="multiselect-option text-dark text-decoration-none"></a>'
             }
-        
-        }); 
+
+        });
     });
 </script>
 <script>
@@ -221,7 +221,7 @@
                     'update_list' : '1'
                 },
                 success: function (responseText, statusText, xhr, $form) {
-                    
+
                     updateTagLists(responseText);
                 }
             });
@@ -254,14 +254,14 @@
                             var $label = $("<label>").attr('id', val+'-servererror').attr('class','error w-100').attr('for',val).text(errorBucket[val][0]);
                                 var $inputField = $("input[name="+val+"]");
                             $label.insertAfter($inputField);
-                            
+
                         });
                     }
                 },
                 success: function (responseText, statusText, xhr, $form) {
-                    
+
                     updateTagLists(responseText);
-                    
+
                     //$('#all_job_tags_section').html(responseText);
                     toastr.success('Tag has been added successfully');
                     // location.href = "{{ route('enquiries.index') }}" + "/" + responseText.id;
@@ -276,62 +276,62 @@
 
 </script>
 
-<script> 
+<script>
 
-    $(document).ready(function(){ 
-    
-        $('#alltagslist').multiselect({ 
+    $(document).ready(function(){
 
-            nonSelectedText: 'Select Tag', 
-            enableFiltering: false, 
-            enableCaseInsensitiveFiltering: false, 
+        $('#alltagslist').multiselect({
+
+            nonSelectedText: 'Select Tag',
+            enableFiltering: false,
+            enableCaseInsensitiveFiltering: false,
             buttonContainer: '<div class="jobspecificlist"></div>',
             buttonClass: '',
             templates: {
                 button: '',
-                ul: '<ul class="multiselect-container checkbox-list pt-4"></ul>',
+                ul: '<ul class="multiselect-container checkbox-list"></ul>',
                 option: '<a class="multiselect-option text-dark text-decoration-none"></a>'
             }
-        
-        }); 
-    
-        $('#all_tags_form').on('submit', function(event){ 
 
-            event.preventDefault(); 
+        });
+
+        $('#all_tags_form').on('submit', function(event){
+
+            event.preventDefault();
             if($("#alltagslist").val().length)
             {
 
-                $.ajax({ 
-    
+                $.ajax({
+
                     url:"{{ route('jobtags.store') }}",
-                    method:"POST", 
+                    method:"POST",
                     data:{
                         '_token': "{{ csrf_token() }}",
                         'tags': $("#alltagslist").val(),
                         'multi_tags_add_and_associate': '1',
                         'job_id': "{{$job_data['id']}}",
                         'update_list': '1'
-                    }, 
-    
-                    success: function(data) 
-                    { 
+                    },
+
+                    success: function(data)
+                    {
                         updateTagLists(data);
                         toastr.success('The tags has been linked successfully');
-                    } 
-            
-                }); 
+                    }
+
+                });
             }
             else{
                 toastr.warning('Please select tags to attach');
             }
-        });  
+        });
     });
-    
+
     $('#add_selected_tags').click(function(){
         $('#all_tags_form').submit();
     });
-    
-</script>   
+
+</script>
 
 <script>
     $('#alltagslist').on('change', function(){
@@ -346,30 +346,30 @@
 </script>
 
 <script>
-        $('#update_tag_form').on('submit', function(event){ 
-            event.preventDefault(); 
+        $('#update_tag_form').on('submit', function(event){
+            event.preventDefault();
             if($('#update_tag_id').val())
             {
-                $(this).ajaxSubmit({ 
+                $(this).ajaxSubmit({
                     resetForm: true,
                     url:"{{ route('jobtags.index') }}/"+$('#update_tag_id').val(),
-                    method:"PUT", 
+                    method:"PUT",
                     data:{
                         '_token': "{{ csrf_token() }}",
                         '_method': 'PUT',
                         'tag' : $('#update_tag_name').val(),
                         'id' : $('#update_tag_id').val(),
                         'update_list': '1'
-                    }, 
-    
-                    success: function(data) 
-                    { 
+                    },
+
+                    success: function(data)
+                    {
                         updateTagLists(data);
                         $('#selected_tag_from_entire_list').html('');
                         toastr.success('Tag has been updated successfully');
-                    } 
-    
-                }); 
+                    }
+
+                });
             }
             else{
                 toastr.error('Please select a tag');
@@ -377,16 +377,16 @@
         });
 
         $('#update_tag_btn').click(function(){
-            
+
             $("#update_tag_form").submit();
 
         });
 </script>
 
 <script>
-    
+
     $('#delete_selected_tags').click(function(){
-    
+
         var tags = [];
         $('#alltagslist option:selected').each(function() {
                 tags.push($(this).val());
@@ -394,7 +394,7 @@
         if(tags.length)
         {
             $.ajax({
-    
+
                 url: "{{route('jobtags.destroyMultiple')}}",
                 method: "DELETE",
                 data: {
@@ -416,9 +416,9 @@
 </script>
 
 <script>
-    
+
     $('#remove_job_specific_tags').click(function(){
-    
+
         var tags = [];
         $('#jobspecifictagslist option:selected').each(function() {
                 tags.push($(this).val());
@@ -426,7 +426,7 @@
         if(tags.length)
         {
             $.ajax({
-    
+
                 url: "{{route('jobtags.destroyMultiple')}}",
                 method: "DELETE",
                 data: {
