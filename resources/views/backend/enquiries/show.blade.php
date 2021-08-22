@@ -208,7 +208,7 @@ $baseRoute= "enquiries";
                   </div>
                 </div>
                 <div class="form-row">
-                  
+
                 </div>
               </div>
               <div class="tab-pane" id="generalenquiryquestions" role="tabpanel"
@@ -222,8 +222,8 @@ $baseRoute= "enquiries";
               <div class="tab-pane" id="jobspecificenquiryquestions" role="tabpanel"
                 aria-expanded="false">
                 <div class="row">
-          
-                    <div class="col-md-12">      
+
+                    <div class="col-md-12">
                       @includeIf('backend.enquiries.inner.job_specific_questions')
                     </div>
                   </div>
@@ -259,8 +259,8 @@ $baseRoute= "enquiries";
           </div>
           <!-- Arul edit ends-->
         </div>
-        
-        
+
+
       </form>
     </div>
   </div>
@@ -271,7 +271,7 @@ $baseRoute= "enquiries";
 
 @section('header')
 <style>
-    .apj-tab-s {
+.apj-tab-s {
   border: 2px groove #ddd !important;
 }
 
@@ -415,45 +415,20 @@ $baseRoute= "enquiries";
   display: block;
 }
 
-#jobtags .ms-list li {
+#jobtags .multiselect-container li {
   width: 100%;
   padding: 6px 10px;
-}
-
-#jobtags .ms-list {
-  border: 2px groove #ddd;
-  height: 430px;
-  overflow-y: auto;
-  overflow-x: hidden;
-}
-
-#jobtags .ms-list li {
-  cursor: pointer;
 }
 
 #jobtags .ms-list li:hover {
   background: #fa5661;
   color: #ffffff;
 }
-
-#jobtags .ms-list li a {
-  display: block;
-  width: 100%;
+#jobtags .multiselect-container li:not(:last-child) {
+  border-bottom: 1px solid #efefef;
 }
-
-#jobtags .ms-list li.selected,
-#jobtags .ms-list li.selected a {
-  background: #fa5661;
-  color: #ffffff;
-}
-
-#jobtags .ms-list li:hover a,
-#jobtags .ms-list li a:focus {
-  color: #ffffff;
-}
-
-#jobtags .ms-list li:not(:last-child) {
-  border-bottom: 1px solid #898989;
+#jobtags .apj-jobspecificlist-left li:first-child {
+  border-bottom: none;
 }
 
 #jobtags .addselectedtext {
@@ -470,9 +445,14 @@ $baseRoute= "enquiries";
   display: block;
   font-size: 70px;
 }
+#jobtags .multiselect-container>li>a>label {
+    padding: 4px 6px;
+}
 
 #jobtags .addselectedtext img {
   width: 65%;
+  display: block;
+  margin: auto;
 }
 
 #jobtags .list-form-group {

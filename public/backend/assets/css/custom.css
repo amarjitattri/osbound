@@ -671,3 +671,25 @@ span.ot-right.ot-enq_date {
 .apj-general-enquiry-questions-tbl tr>th{
     text-align: center;
 }
+.jobspecificlist .checkbox-list {
+    width: 100%;
+}
+
+.apj-jobspecificlist-left .input-group span.input-group-btn{
+display: none;
+}
+
+.apj-jobspecificlist-left .multiselect-container .input-group {
+    margin: 5px 0px;
+}
+.apj-jobspecificlist-left .multiselect-container .multiselect-search {
+    margin: 0 6px;
+}
+
+#jobtags ul.multiselect-container {
+    width: 95%;
+    border: 2px groove #ddd;
+    height: 430px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
