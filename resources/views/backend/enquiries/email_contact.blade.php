@@ -89,87 +89,27 @@
                             </div>
                         </div>
                         <ul class="enquiry_image_thumb set-width image_thumb_grid scroll">
-                            <li data-src="https://dev.data-solve.co.uk/dev/ot/uploads/enquiry_medias/images/MfvQ00r4W3OV8xuZ0juNrzEVb1abF4vtpQPbNUdU.jpeg" id="image_li_1">
-                                <div class="enquiry_inner set-bg" style="background: url('https://dev.data-solve.co.uk/dev/ot/uploads/enquiry_medias/images/MfvQ00r4W3OV8xuZ0juNrzEVb1abF4vtpQPbNUdU.jpeg')">
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input selected_images" id="image_checkbox_1" value="1">
-                                        <label class="custom-control-label" for="image_checkbox_1"></label>
+                        @if ($job_data->images()->count())
+                            @foreach ($job_data->images()->get() as $image)
+                                <li data-src="{{asset($image->path)}}" id="image_li_{{$image->id}}">
+                                    <div class="enquiry_inner set-bg"
+                                            style="background: url('{{asset($image->path)}}')">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox"
+                                                    class="custom-control-input selected_images"
+                                                    id="image_checkbox_{{$image->id}}"
+                                                    name="image_gallery[]"
+                                                    value="{{$image->path}}">
+                                            <label class="custom-control-label"
+                                                    for="image_checkbox_{{$image->id}}"></label>
+                                        </div>
                                     </div>
-                                </div>
-                            </li>
-                            <li data-src="https://dev.data-solve.co.uk/dev/ot/uploads/enquiry_medias/images/MfvQ00r4W3OV8xuZ0juNrzEVb1abF4vtpQPbNUdU.jpeg" id="image_li_6">
-                                <div class="enquiry_inner set-bg" style="background: url('https://dev.data-solve.co.uk/dev/ot/uploads/enquiry_medias/images/MfvQ00r4W3OV8xuZ0juNrzEVb1abF4vtpQPbNUdU.jpeg')">
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input selected_images" id="image_checkbox_6" value="6">
-                                        <label class="custom-control-label" for="image_checkbox_6"></label>
-                                    </div>
-                                </div>
-                            </li>
-                            <li data-src="https://dev.data-solve.co.uk/dev/ot/uploads/enquiry_medias/images/MfvQ00r4W3OV8xuZ0juNrzEVb1abF4vtpQPbNUdU.jpeg" id="image_li_7">
-                                <div class="enquiry_inner set-bg" style="background: url('https://dev.data-solve.co.uk/dev/ot/uploads/enquiry_medias/images/MfvQ00r4W3OV8xuZ0juNrzEVb1abF4vtpQPbNUdU.jpeg')">
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input selected_images" id="image_checkbox_7" value="7">
-                                        <label class="custom-control-label" for="image_checkbox_7"></label>
-                                    </div>
-                                </div>
-                            </li>
-                            <li data-src="https://dev.data-solve.co.uk/dev/ot/uploads/enquiry_medias/images/MfvQ00r4W3OV8xuZ0juNrzEVb1abF4vtpQPbNUdU.jpeg" id="image_li_8">
-                                <div class="enquiry_inner set-bg" style="background: url('https://dev.data-solve.co.uk/dev/ot/uploads/enquiry_medias/images/MfvQ00r4W3OV8xuZ0juNrzEVb1abF4vtpQPbNUdU.jpeg')">
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input selected_images" id="image_checkbox_8" value="8">
-                                        <label class="custom-control-label" for="image_checkbox_8"></label>
-                                    </div>
-                                </div>
-                            </li>
-                            <li data-src="https://dev.data-solve.co.uk/dev/ot/uploads/enquiry_medias/images/MfvQ00r4W3OV8xuZ0juNrzEVb1abF4vtpQPbNUdU.jpeg" id="image_li_9">
-                                <div class="enquiry_inner set-bg" style="background: url('https://dev.data-solve.co.uk/dev/ot/uploads/enquiry_medias/images/MfvQ00r4W3OV8xuZ0juNrzEVb1abF4vtpQPbNUdU.jpeg')">
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input selected_images" id="image_checkbox_9" value="9">
-                                        <label class="custom-control-label" for="image_checkbox_9"></label>
-                                    </div>
-                                </div>
-                            </li>
-                            <li data-src="https://dev.data-solve.co.uk/dev/ot/uploads/enquiry_medias/images/MfvQ00r4W3OV8xuZ0juNrzEVb1abF4vtpQPbNUdU.jpeg" id="image_li_10">
-                                <div class="enquiry_inner set-bg" style="background: url('https://dev.data-solve.co.uk/dev/ot/uploads/enquiry_medias/images/MfvQ00r4W3OV8xuZ0juNrzEVb1abF4vtpQPbNUdU.jpeg')">
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input selected_images" id="image_checkbox_10" value="10">
-                                        <label class="custom-control-label" for="image_checkbox_10"></label>
-                                    </div>
-                                </div>
-                            </li>
-                            <li data-src="https://dev.data-solve.co.uk/dev/ot/uploads/enquiry_medias/images/MfvQ00r4W3OV8xuZ0juNrzEVb1abF4vtpQPbNUdU.jpeg" id="image_li_11">
-                                <div class="enquiry_inner set-bg" style="background: url('https://dev.data-solve.co.uk/dev/ot/uploads/enquiry_medias/images/MfvQ00r4W3OV8xuZ0juNrzEVb1abF4vtpQPbNUdU.jpeg')">
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input selected_images" id="image_checkbox_11" value="11">
-                                        <label class="custom-control-label" for="image_checkbox_11"></label>
-                                    </div>
-                                </div>
-                            </li>
-                            <li data-src="https://dev.data-solve.co.uk/dev/ot/uploads/enquiry_medias/images/MfvQ00r4W3OV8xuZ0juNrzEVb1abF4vtpQPbNUdU.jpeg" id="image_li_12">
-                                <div class="enquiry_inner set-bg" style="background: url('https://dev.data-solve.co.uk/dev/ot/uploads/enquiry_medias/images/MfvQ00r4W3OV8xuZ0juNrzEVb1abF4vtpQPbNUdU.jpeg')">
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input selected_images" id="image_checkbox_12" value="12">
-                                        <label class="custom-control-label" for="image_checkbox_12"></label>
-                                    </div>
-                                </div>
-                            </li>
-                            <li data-src="https://dev.data-solve.co.uk/dev/ot/uploads/enquiry_medias/images/MfvQ00r4W3OV8xuZ0juNrzEVb1abF4vtpQPbNUdU.jpeg" id="image_li_13">
-                                <div class="enquiry_inner set-bg" style="background: url('https://dev.data-solve.co.uk/dev/ot/uploads/enquiry_medias/images/MfvQ00r4W3OV8xuZ0juNrzEVb1abF4vtpQPbNUdU.jpeg')">
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input selected_images" id="image_checkbox_13" value="13">
-                                        <label class="custom-control-label" for="image_checkbox_13"></label>
-                                    </div>
-                                </div>
-                            </li>
-                            <li data-src="https://dev.data-solve.co.uk/dev/ot/uploads/enquiry_medias/images/MfvQ00r4W3OV8xuZ0juNrzEVb1abF4vtpQPbNUdU.jpeg" id="image_li_14">
-                                <div class="enquiry_inner set-bg" style="background: url('https://dev.data-solve.co.uk/dev/ot/uploads/enquiry_medias/images/MfvQ00r4W3OV8xuZ0juNrzEVb1abF4vtpQPbNUdU.jpeg')">
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input selected_images" id="image_checkbox_14" value="14">
-                                        <label class="custom-control-label" for="image_checkbox_14"></label>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
+                                </li>
+                            @endforeach
+                        @else
+                            <h5 class="p-t-50 p-b-50 m-auto">Images Not Found</h5>
+                        @endif
+                    </ul>
                     </div><!-- /.col-md-12 -->
                 </div>
             </div>
