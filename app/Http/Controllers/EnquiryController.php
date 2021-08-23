@@ -187,7 +187,7 @@ class EnquiryController extends Controller
         
         $job_specific_enquiry_questions = \Config::get('constants.forms.enquiries.job_specific_enquiry_questions');
 
-        $job_tags = JobTag::doesntHave('jobs')->where('is_active', '1')->get();
+        $job_tags = JobTag::where('is_active', '1')->get();
 
         return view('backend.enquiries.show', [
                                                 'job_data' => $job_data ,
