@@ -58,13 +58,20 @@
                     <span class="pcoded-mcaret"></span>
                 </a>
             </li>
-            <li class="{{ isActiveMenu('maintenance') }} pcoded-hasmenu">
+            <li class="{{ isActiveMenu('jobquestions') }} pcoded-hasmenu">
                 <a href="#">
                     <span class="pcoded-micon"><i class="ti-home"></i><b>M</b></span>
                     <span class="pcoded-mtext">Maintenance</span>
                     <span class="pcoded-mcaret"></span>
                 </a>
               <ul class="pcoded-submenu">
+                <li class="">
+                  <a href="{{route('jobquestions.index')}}">
+                    <span class="pcoded-micon"><i class="ti-home"></i><b>P</b></span>
+                    <span class="pcoded-mtext">Job Config</span>
+                    <span class="pcoded-mcaret"></span>
+                  </a>
+                </li>
                 <li class="">
                   <a href="">
                     <span class="pcoded-micon"><i class="ti-home"></i><b>P</b></span>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Job;
 use App\Models\JobTag;
+use App\Models\JobQuestion;
 use App\Models\Contact;
 use App\Models\Client;
 use Illuminate\Support\Str;
@@ -183,10 +184,13 @@ class EnquiryController extends Controller
     {
         $job_data = Job::with(['generalEnquiryQuestion', 'jobSpecificEnquiryQuestion' , 'contact' , 'jobTasks' , 'jobTags'])->where('id',$id)->where('is_active' , 1)->where('job_type_slug' , 'enquiries')->first();
         // dd($job_data);
-        $general_enquiry_questions = \Config::get('constants.forms.enquiries.general_enquiry_questions');
-        
-        $job_specific_enquiry_questions = \Config::get('constants.forms.enquiries.job_specific_enquiry_questions');
+        // $general_enquiry_questions = \Config::get('constants.forms.enquiries.general_enquiry_questions');
+        $general_enquiry_questions = JobQuestion::where('type','general_enquiry_questions')->where('is_active',1)->get()->pluck('attributes','field')->toArray();
 
+        // $job_specific_enquiry_questions = \Config::get('constants.forms.enquiries.job_specific_enquiry_questions');
+        $job_specific_enquiry_questions = JobQuestion::where('type','job_specific_enquiry_questions')->where('is_active',1)->get()->pluck('attributes','field')->toArray();
+        
+        // dd($general_enquiry_questions, $job_specific_enquiry_questions);
         $job_tags = JobTag::where('is_active', '1')->get();
 
         return view('backend.enquiries.show', [
