@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\JobEmail;
 use App\Models\Job;
+use App\Models\JobTag;
+use App\Models\Media;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\JobEmailer;
@@ -16,9 +18,50 @@ class JobEmailController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        if($request->ajax() && @$request['update_content']){
+            $tags = $request['tags'];
+            $images = [];
+            if(count($tags)){
+                
+                //------Get all jobs from tags
+
+                $job_tags = JobTag::has('jobs')->with('jobs',function($query){
+                    $query->select('id');
+                })
+                ->whereIn('job_tags.id',$tags)
+                ->get()->pluck('jobs');
+
+                $jobs = [];
+                foreach($job_tags as $job){
+                    foreach($job as $j){
+                        $jobs[] = $j['id'];
+                    }
+                }
+                $all_jobs = [];
+                if(count($jobs)){
+                    $jobs = array_unique($jobs);
+
+                    //---- Get all media from the jobs selected above
+
+                    $all_jobs = Job::has('medias')->with('medias',function($query){
+                        $query->where('type','image');
+                    })->whereIn('id' , $jobs)->where('is_active',1)->get()->pluck('medias');
+
+                    foreach($all_jobs as $all_media){
+                        foreach($all_media as $media){
+                            $images[] = [
+                                'id' => $media['id'],
+                                'path' => $media['path']
+                            ];
+                        }
+                    }
+                }
+            }
+
+            return response()->json($images);
+        }
     }
 
     /**
@@ -103,11 +146,17 @@ class JobEmailController extends Controller
      * @param  \App\Models\JobEmail  $jobEmail
      * @return \Illuminate\Http\Response
      */
-    public function show($job_id)
+    public function show(Request $request, $job_id)
     {
-        $job_data = Job::with(['contact'])->where('id',$job_id)->first();
+        $job_data = Job::with(['contact'])->where('id',$job_id)->where('is_active',1)->first();
+
+        $job_tags = JobTag::where('is_active',1)->get();
+
+        if($request->ajax() && @$request['update_content']){
+            return response()->json($job_data->images()->get());
+        }
         
-        return view('backend.enquiries.email_contact',['job_data' => $job_data]);
+        return view('backend.enquiries.email_contact',['job_data' => $job_data , 'job_tags' => $job_tags]);
     }
 
     /**
