@@ -4,6 +4,7 @@ use App\Http\Controllers\EnquiryController;
 use App\Http\Controllers\JobTaskController;
 use App\Http\Controllers\JobTagController;
 use App\Http\Controllers\JobEmailController;
+use App\Http\Controllers\JobQuestionController;
 use App\Http\Controllers\MediaController;
 use App\Http\Controllers\ClientsAndContactsController;
 use Illuminate\Support\Facades\Route;
@@ -35,6 +36,8 @@ Route::group(['middleware' => 'auth:web'], function () {
 
     Route::delete('medias/destroyMultiple', [MediaController::class,'destroyMultiple'])->name('medias.destroyMultiple');
     Route::resource('medias', MediaController::class);
+    
+    Route::resource('jobquestions', JobQuestionController::class);
     
 
     // Client and contacts

@@ -35,21 +35,21 @@ return [
                         '2' => 'London Spray Finishes'
                     ]
                 ],
-                'enquiry_owner' => [
-                    'type' => 'select',
-                    'title' => 'Enquiry Owner',
-                    'field' => 'enquiry_owner',
-                    'options' => [
-                        '1' => [
-                            '1' => 'John',
-                            '2' => 'Steve'
-                        ],
-                        '2' => [
-                            '1' => 'Alec',
-                            '2' => 'Sales Rep 1'
-                        ]
-                    ]
-                ],
+                // 'enquiry_owner' => [
+                //     'type' => 'select',
+                //     'title' => 'Enquiry Owner',
+                //     'field' => 'enquiry_owner',
+                //     'options' => [
+                //         '1' => [
+                //             '1' => 'John',
+                //             '2' => 'Steve'
+                //         ],
+                //         '2' => [
+                //             '1' => 'Alec',
+                //             '2' => 'Sales Rep 1'
+                //         ]
+                //     ]
+                // ],
                 'hear_from' => [
                     'type' => 'select',
                     'title' => 'How did you hear about us?',

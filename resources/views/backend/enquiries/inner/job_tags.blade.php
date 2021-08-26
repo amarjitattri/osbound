@@ -218,7 +218,8 @@
                 method: "GET",
                 url: "{{ route('jobtags.index')}}",
                 data: {
-                    'update_list' : '1'
+                    'update_list' : '1',
+                    'job_id': "{{ $job_data['id']}}",
                 },
                 success: function (responseText, statusText, xhr, $form) {
 
@@ -359,7 +360,8 @@
                         '_method': 'PUT',
                         'tag' : $('#update_tag_name').val(),
                         'id' : $('#update_tag_id').val(),
-                        'update_list': '1'
+                        'update_list': '1',
+                        'job_id': "{{$job_data['id']}}"
                     },
 
                     success: function(data)
@@ -401,7 +403,8 @@
                     '_method' : "DELETE",
                     '_token' : "{{ csrf_token()}}",
                     'tags' : tags,
-                    'delete_from_all_tags': '1'
+                    'delete_from_all_tags': '1',
+                    'job_id': "{{$job_data['id']}}"
                 },
                 success: function(data){
                     updateTagLists(data);

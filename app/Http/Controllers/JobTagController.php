@@ -19,7 +19,7 @@ class JobTagController extends Controller
 
         if($request->json() && $request['update_list']){
             
-            $job_all_tags = JobTag::doesntHave('jobs');
+            $job_all_tags = new JobTag;
 
             if(@$request['searched_tags']){
 
@@ -35,7 +35,14 @@ class JobTagController extends Controller
             
             
             $job_all_tags = $job_all_tags->where('is_active','1')->get();
-            $job_specific_tags = JobTag::has('jobs')->where('is_active','1')->get();
+            $job_specific_all_tags = JobTag::has('jobs')->where('is_active','1')->orderBy('id','asc')->get();
+            $job_specific_tags = [];
+            foreach($job_specific_all_tags as $tag){
+                if($tag->jobs()->where('id',$request['job_id'])->exists())
+                {
+                    $job_specific_tags[] = $tag;
+                }
+            }
 
             return response()->json(['job_all_tags'=> $job_all_tags, 'job_specific_tags' => $job_specific_tags]);
 
@@ -63,7 +70,7 @@ class JobTagController extends Controller
         if(@$request['multi_tags_add_and_associate'])
         {
             $job = Job::findOrFail($request['job_id']);
-            $job->jobTags()->attach($request['tags']);
+            $job->jobTags()->syncWithoutDetaching($request['tags']);
         }
         else
         {
@@ -82,9 +89,15 @@ class JobTagController extends Controller
 
         if($request->json() && $request['update_list']){
             
-            $job_all_tags = JobTag::doesntHave('jobs')->where('is_active','1')->get();
-            $job_specific_tags = JobTag::has('jobs')->where('is_active','1')->get();
-
+            $job_all_tags = JobTag::where('is_active','1')->get();
+            $job_specific_all_tags = JobTag::has('jobs')->where('is_active','1')->orderBy('id','asc')->get();
+            $job_specific_tags = [];
+            foreach($job_specific_all_tags as $tag){
+                if($tag->jobs()->where('id',$request['job_id'])->exists())
+                {
+                    $job_specific_tags[] = $tag;
+                }
+            }
             return response()->json(['job_all_tags'=> $job_all_tags, 'job_specific_tags' => $job_specific_tags]);
 
         }
@@ -134,8 +147,15 @@ class JobTagController extends Controller
 
         if($request->ajax())
         {
-            $job_all_tags = JobTag::doesntHave('jobs')->where('is_active','1')->get();
-            $job_specific_tags = JobTag::has('jobs')->where('is_active','1')->get();
+            $job_all_tags = JobTag::where('is_active','1')->get();
+            $job_specific_all_tags = JobTag::has('jobs')->where('is_active','1')->orderBy('id','asc')->get();
+            $job_specific_tags = [];
+            foreach($job_specific_all_tags as $tag){
+                if($tag->jobs()->where('id',$request['job_id'])->exists())
+                {
+                    $job_specific_tags[] = $tag;
+                }
+            }
 
             return response()->json(['job_all_tags'=> $job_all_tags, 'job_specific_tags' => $job_specific_tags]);
         }
@@ -170,9 +190,16 @@ class JobTagController extends Controller
 
         if($request->ajax())
         {
-            $job_all_tags = JobTag::doesntHave('jobs')->where('is_active','1')->get();
-            $job_specific_tags = JobTag::has('jobs')->where('is_active','1')->get();
-
+            $job_all_tags = JobTag::where('is_active','1')->get();
+            $job_specific_all_tags = JobTag::has('jobs')->where('is_active','1')->orderBy('id','asc')->get();
+            $job_specific_tags = [];
+            foreach($job_specific_all_tags as $tag){
+                if($tag->jobs()->where('id',$request['job_id'])->exists())
+                {
+                    $job_specific_tags[] = $tag;
+                }
+            }
+            
             return response()->json(['job_all_tags'=> $job_all_tags, 'job_specific_tags' => $job_specific_tags]);
         }
 
