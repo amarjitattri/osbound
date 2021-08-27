@@ -727,6 +727,27 @@ span.ot-right.ot-enq_date {
 .email_contact ul.enquiry_image_thumb li {
     width: 25%;
 }
+.email_contact #images_container button.multiselect {
+    width: 100%;
+    text-align: left;
+    border: 1px solid #cccccc;
+}
+.prl-10{
+    padding-right: 10px;
+    padding-left: 10px;
+}
+.email_contact #images_container ul.multiselect-container {
+    width: 60%;
+}
+.email_contact #images_container ul.multiselect-container li.multiselect-item .input-group-addon, .email_contact #images_container ul.multiselect-container li.multiselect-item span.input-group-btn{
+    display: none;
+}
+.email_contact #images_container ul.multiselect-container li input {
+    margin-right: 10px;
+}
+.email_contact #images_container ul.multiselect-container>li>a {
+    margin-left: -20px;
+}
 @media only screen and (min-width: 1260px) and (max-width: 1520px) {
 #transport_require_date_col{
     flex: 0 0 55.666667%;

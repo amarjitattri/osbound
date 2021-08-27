@@ -122,11 +122,16 @@
                 </div>
             </div>
             <hr>
-            <div class="row text-center">
-                <div class="col-lg-6">
+            <div class="row">
+                <div class="col-md-7">
+                <div class="row">
+            <div class="col-md-2"></div>
+                <div class="col-md-10">
                     {!! Form::submit('Send', ['class' => 'btn btn-outline-primary']) !!}
                     {{-- <a href="{!! route('enquiries.edit',@$enquiry->id) !!}" class="btn btn-outline-warning">Back to
                             Enquiry</a> --}}
+                </div>
+                </div>
                 </div>
             </div>
         </form>
@@ -152,7 +157,7 @@
             nonSelectedText: 'Select Tags',
             enableFiltering: true,
             enableCaseInsensitiveFiltering: true,
-            buttonContainer: '<div class="border border-dark w-100 text-center"></div>',
+            buttonContainer: '<div class="prl-10 w-100"></div>',
 
         });
     });
@@ -249,7 +254,7 @@
                 $('#images_container').show();
             }
             else{
-                $('#images_container').hide();  
+                $('#images_container').hide();
             }
 
         });
